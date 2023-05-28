@@ -42,25 +42,39 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <?php include 'navigation.php'; ?>
+    </nav> 
 
-<form action="" method="post">
     <h1>Update Data Dosen</h1>
-    <ul>
-        <li>
-            <label for="nama">Nama:</label>
-            <input type="text" name="nama" id="nama" value="<?= $data['nama']; ?>">
-        </li>
-        <li>
-            <label for="nip">NIP:</label>
-            <input type="text" name="nip" id="nip" value="<?= $data['nip']; ?>">
-        </li>
-        <li>
-            <label for="bidang_ilmu">Bidang Ilmu:</label>
-            <input type="text" name="bidang_ilmu" id="bidang_ilmu" value="<?= $data['bidang_ilmu']; ?>">
-        </li>
-        <li>
-            <input type="hidden" name="id_dosen" value="<?= $data['id_dosen']; ?>">
-            <button type="submit" name="submit">Edit</button>
-        </li>
-    </ul>
-</form>
+    <form action="" method="post">
+        <ul>
+            <li>
+                <label for="nama">Nama:</label>
+                <input type="text" name="nama" id="nama" value="<?= $data['nama']; ?>">
+            </li>
+            <li>
+                <label for="nip">NIP:</label>
+                <input type="text" name="nip" id="nip" value="<?= $data['nip']; ?>">
+            </li>
+            <li>
+                <label for="bidang_ilmu">Bidang Ilmu:</label>
+                <input type="text" name="bidang_ilmu" id="bidang_ilmu" value="<?= $data['bidang_ilmu']; ?>">
+            </li>
+            <li>
+                <input type="hidden" name="id_dosen" value="<?= $data['id_dosen']; ?>">
+                <button type="submit" name="submit">Edit</button>
+            </li>
+        </ul>
+    </form>
+</body>
+</html>

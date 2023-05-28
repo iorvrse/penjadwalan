@@ -31,6 +31,10 @@ if( isset($_POST["cari"]) ) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <nav>
+        <?php include 'navigation.php'; ?>
+    </nav> 
+
     <h1>Data Dosen</h1>
     <a href="add_dosen.php">Tambah</a>
     <br><br>

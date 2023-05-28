@@ -47,6 +47,10 @@ if( isset($_POST["submit"]) ) {
     <title></title>
 </head>
 <body>
+    <nav>
+        <?php include 'navigation.php'; ?>
+    </nav>
+    
     <h1>Tambah Data Slot Waktu</h1>
     <form action="" method="post">
         <ul>

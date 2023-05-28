@@ -31,6 +31,10 @@ if( isset($_POST["cari"]) ) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <nav>
+        <?php include 'navigation.php'; ?>
+    </nav>
+    
     <h1>Data slot waktu</h1>
     <a href="add_slot_waktu.php">Tambah</a>
     <br><br>

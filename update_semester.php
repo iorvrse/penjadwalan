@@ -42,20 +42,35 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<form action="" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <?php include 'navigation.php'; ?>
+    </nav> 
+    
     <h1>Update Data semester</h1>
-    <ul>
-        <li>
-            <label for="tahun">Tahun:</label>
-            <input type="text" name="tahun" id="tahun" value="<?= $data['tahun']; ?>">
-        </li>
-        <li>
-            <label for="semester">Semester:</label>
-            <input type="text" name="semester" id="semester" value="<?= $data['semester']; ?>">
-        </li>
-        <li>
-            <input type="hidden" name="id_semester" value="<?= $data['id_semester']; ?>">
-            <button type="submit" name="submit">Edit</button>
-        </li>
-    </ul>
-</form>
+    <form action="" method="post">
+        <ul>
+            <li>
+                <label for="tahun">Tahun:</label>
+                <input type="text" name="tahun" id="tahun" value="<?= $data['tahun']; ?>">
+            </li>
+            <li>
+                <label for="semester">Semester:</label>
+                <input type="text" name="semester" id="semester" value="<?= $data['semester']; ?>">
+            </li>
+            <li>
+                <input type="hidden" name="id_semester" value="<?= $data['id_semester']; ?>">
+                <button type="submit" name="submit">Edit</button>
+            </li>
+        </ul>
+    </form>
+</body>
+</html>

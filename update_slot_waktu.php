@@ -48,24 +48,39 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<form action="" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <?php include 'navigation.php'; ?>
+    </nav> 
+    
     <h1>Update Data slot_waktu</h1>
-    <ul>
-        <li>
-            <label for="waktu_slot_awal">Jam awal:</label>
-            <input type="text" name="waktu_slot_awal" id="waktu_slot_awal" value="<?= $data['waktu_slot_awal']; ?>">
-        </li>
-        <li>
-            <label for="waktu_slot_akhir">Jam akhir:</label>
-            <input type="text" name="waktu_slot_akhir" id="waktu_slot_akhir" value="<?= $data['waktu_slot_akhir']; ?>">
-        </li>
-        <li>
-            <label for="hari_slot">Hari:</label>
-            <input type="text" name="hari_slot" id="hari_slot" value="<?= $data['hari_slot']; ?>">
-        </li>
-        <li>
-            <input type="hidden" name="id_slot" value="<?= $data['id_slot']; ?>">
-            <button type="submit" name="submit">Edit</button>
-        </li>
-    </ul>
-</form>
+    <form action="" method="post">
+        <ul>
+            <li>
+                <label for="waktu_slot_awal">Jam awal:</label>
+                <input type="text" name="waktu_slot_awal" id="waktu_slot_awal" value="<?= $data['waktu_slot_awal']; ?>">
+            </li>
+            <li>
+                <label for="waktu_slot_akhir">Jam akhir:</label>
+                <input type="text" name="waktu_slot_akhir" id="waktu_slot_akhir" value="<?= $data['waktu_slot_akhir']; ?>">
+            </li>
+            <li>
+                <label for="hari_slot">Hari:</label>
+                <input type="text" name="hari_slot" id="hari_slot" value="<?= $data['hari_slot']; ?>">
+            </li>
+            <li>
+                <input type="hidden" name="id_slot" value="<?= $data['id_slot']; ?>">
+                <button type="submit" name="submit">Edit</button>
+            </li>
+        </ul>
+    </form>
+</body>
+</html>

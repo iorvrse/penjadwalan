@@ -21,12 +21,7 @@ require 'function.php';
 <body>
     <h1>Aplikasi Penjadwalan</h1>
     <nav>
-        <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="dosen.php">Database Dosen</a></li>
-            <li><a href="semester.php">Database Semester</a></li>
-            <li><a href="slot_waktu.php">Database Slot Waktu</a></li>
-        </ul>
+        <?php include 'navigation.php'; ?>
     </nav>
 </body>
 </html>
