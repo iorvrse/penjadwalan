@@ -1,6 +1,26 @@
-<?php 
-    require 'function.php';
-    $result = mysqli_query($conn, "SELECT * FROM dosen");
+<?php
+session_start();
+
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
+
+require 'function.php';
+$result = mysqli_query($conn, "SELECT * FROM dosen");
+
+if( isset($_POST["cari"]) ) {
+    $keyword = $_POST["keyword"];
+    
+    $query = "SELECT * FROM dosen WHERE
+                nama LIKE '%$keyword%' OR
+                nip LIKE '%$keyword%' OR
+                bidang_ilmu LIKE '%$keyword%'
+            ";
+
+    mysqli_query($conn, $query);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +34,13 @@
     <h1>Data Dosen</h1>
     <a href="add_dosen.php">Tambah</a>
     <br><br>
+
+    <form action="" method="post">
+        <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
+        <button type="submit" name="cari">cari</button>
+    </form>
+    <br>
+
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>Nama</th>

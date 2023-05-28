@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
+
 require 'function.php';
 
 $id_dosen = $_GET['id_dosen'];
@@ -20,14 +27,14 @@ if (isset($_POST['submit'])) {
         echo "
             <script>
                 alert('data berhasil diubah!');
-                document.location.href = 'index.php';
+                document.location.href = 'dosen.php';
             </script>
         ";
     } else {
         echo "
             <script>
                 alert('data gagal diubah!');
-                document.location.href = 'index.php';
+                document.location.href = 'dosen.php';
             </script>
         ";
     }
