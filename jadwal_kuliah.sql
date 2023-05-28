@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `dosen` (
   `id_pengguna` int NOT NULL,
   PRIMARY KEY (`id_dosen`),
   KEY `id_pengguna` (`id_pengguna`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `jadwal` (
   KEY `id_dosen` (`id_dosen`),
   KEY `id_slot` (`id_slot`),
   KEY `kode_matakuliah` (`kode_matakuliah`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `matakuliah` (
   `jenis_matakuliah` varchar(50) NOT NULL,
   `flag_aktif` varchar(15) NOT NULL,
   PRIMARY KEY (`kode_matakuliah`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
   `level_pengguna` varchar(50) NOT NULL,
   `flag_aktif` varchar(15) NOT NULL,
   PRIMARY KEY (`id_pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `ruangan` (
   `nama_ruangan` varchar(20) NOT NULL,
   `kapasitas_ruangan` int NOT NULL,
   PRIMARY KEY (`id_ruangan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `semester` (
   `nama_semester` varchar(50) NOT NULL,
   `tgl_awal_semester` date NOT NULL,
   `tgl_akhir_semester` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `slot_waktu` (
   `waktu_slot_akhir` time NOT NULL,
   `hari_slot` varchar(10) NOT NULL,
   PRIMARY KEY (`id_slot`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
