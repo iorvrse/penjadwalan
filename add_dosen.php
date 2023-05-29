@@ -14,7 +14,7 @@ if( isset($_POST["submit"]) ) {
     $nip = $_POST['nip'];
     $bidang_ilmu = $_POST['bidang_ilmu'];
 
-    $query = "INSERT INTO dosen VALUES ('', '$nama', '$nip', '$bidang_ilmu', '')";
+    $query = "INSERT INTO dosen VALUES ('', '$nama', '$nip', '$bidang_ilmu')";
     
     mysqli_query($conn, $query);
 

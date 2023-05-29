@@ -13,7 +13,7 @@ if( isset($_POST["submit"]) ) {
     $tahun = $_POST['tahun'];
     $semester = $_POST['semester'];
 
-    $query = "INSERT INTO semester VALUES ('', '$tahun', '$semester', 'tidak aktif', '')";
+    $query = "INSERT INTO semester VALUES ('', '$tahun', '$semester', 0)";
     
     mysqli_query($conn, $query);
 

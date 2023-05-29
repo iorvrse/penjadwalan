@@ -18,7 +18,7 @@ if( isset($_POST["cari"]) ) {
                 status LIKE '%$keyword%'
             ";
 
-    mysqli_query($conn, $query);
+    $result = mysqli_query($conn, $query);
 }
 
 ?>
@@ -59,9 +59,11 @@ if( isset($_POST["cari"]) ) {
             <td><?= $data['semester']; ?></td>
             <td><?= $data['status'] == 1 ? 'aktif': 'tidak aktif'; ?></td>
             <td>
-                <a href="update_semester_aktivasi.php?id_semester=<?= $data['id_semester']; ?>&status=<?= $data['status']; ?>">
-                    #
-                </a>
+                <button type="button">
+                    <a href="update_semester_aktivasi.php?id_semester=<?= $data['id_semester']; ?>&status=<?= $data['status']; ?>">
+                        ubah
+                    </a>
+                </button>
             </td>
             <td colspan="2">
                 <a href="update_semester.php?id_semester=<?= $data['id_semester']; ?>">Edit</a> |

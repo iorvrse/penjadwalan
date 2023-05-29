@@ -18,7 +18,7 @@ if( isset($_POST["cari"]) ) {
                 hari_slot LIKE '%$keyword%'
             ";
 
-    mysqli_query($conn, $query);
+    $result = mysqli_query($conn, $query);
 }
 
 ?>
@@ -59,8 +59,8 @@ if( isset($_POST["cari"]) ) {
             <td><?= $data['waktu_slot_akhir']; ?></td>
             <td><?= $data['hari_slot']; ?></td>
             <td colspan="2">
-                <a href="update_slot_waktu.php?id_slot=<?= $data['id_slot_waktu']; ?>">Edit</a> |
-                <a href="delete_slot_waktu.php?id_slot=<?= $data['id_slot_waktu']; ?>" 
+                <a href="update_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>">Edit</a> |
+                <a href="delete_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>" 
                     onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
             </td>
         </tr>

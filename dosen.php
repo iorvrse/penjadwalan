@@ -18,7 +18,7 @@ if( isset($_POST["cari"]) ) {
                 bidang_ilmu LIKE '%$keyword%'
             ";
 
-    mysqli_query($conn, $query);
+    $result = mysqli_query($conn, $query);
 }
 
 ?>
