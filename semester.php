@@ -50,7 +50,7 @@ if( isset($_POST["cari"]) ) {
             <th>Tahun</th>
             <th>Semester</th>
             <th>Status</th>
-            <th>Action</th>
+            <th colspan="2">Action</th>
         </tr>
         
         <?php while ($data = mysqli_fetch_assoc($result)): ?>
