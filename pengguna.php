@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if( !isset($_SESSION["login"]) ) {
+if( !isset($_SESSION["login"]) or $_SESSION['level_pengguna'] != "admin" ) {
 	header("Location: login.php");
 	exit;
 }
@@ -66,10 +66,14 @@ if( isset($_POST["cari"]) ) {
                 <td><?= $data['username']; ?></td>
                 <td><?= $data['level_pengguna']; ?></td>
                 <td colspan="2">
-                <?php if ($data['level_pengguna'] != "admin" or $_SESSION['username'] == "admin") : ?>
+                <?php if ($data['username'] == "admin") : ?>
+                    <a role="link" aria-disabled="true">Edit</a> |
+                    <a role="link" aria-disabled="true">Delete</a>
+                <?php elseif ($data['level_pengguna'] != "admin") : ?>
                     <a href="update_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>">Edit</a> |
                     <a href="delete_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>" 
-                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
+                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete
+                    </a>
                 <?php else : ?>
                     <a role="link" aria-disabled="true">Edit</a> |
                     <a role="link" aria-disabled="true">Delete</a>

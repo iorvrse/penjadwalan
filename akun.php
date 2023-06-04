@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if( !isset($_SESSION["login"]) ) {
+if( !isset($_SESSION["login"]) or $_SESSION['level_pengguna'] != "admin" ) {
 	header("Location: login.php");
 	exit;
 }
@@ -91,11 +91,11 @@ if (isset($_POST['submit'])) {
         <ul>
             <li>
                 <label for="nama_pengguna">Nama:</label>
-                <input type="text" name="nama_pengguna" id="nama_pengguna" value="<?= $data['nama_pengguna']; ?>" disabled>
+                <input type="text" name="nama_pengguna" id="nama_pengguna" value="<?= $data['nama_pengguna']; ?>" <?= $_SESSION['username'] == "admin" ? "disabled" : ""; ?>>
             </li>
             <li>
                 <label for="username">Username:</label>
-                <input type="text" name="username" id="username" value="<?= $data['username']; ?>" disabled>
+                <input type="text" name="username" id="username" value="<?= $data['username']; ?>" <?= $_SESSION['username'] == "admin" ? "disabled" : ""; ?>>
             </li>
             <li>
                 <label for="password_lama">Password lama:</label>

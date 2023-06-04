@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if( !isset($_SESSION["login"]) ) {
+if( !isset($_SESSION["login"]) or $_SESSION['level_pengguna'] != "admin" ) {
 	header("Location: login.php");
 	exit;
 }
@@ -37,8 +37,6 @@ if( isset($_POST["cari"]) ) {
     </nav> 
 
     <h1>Data jadwal</h1>
-    <a href="add_jadwal.php">Tambah</a>
-    <br><br>
 
     <form action="" method="post">
         <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
