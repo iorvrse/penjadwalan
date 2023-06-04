@@ -14,8 +14,7 @@ if( isset($_POST["cari"]) ) {
     
     $query = "SELECT * FROM slot_waktu WHERE
                 waktu_slot_awal LIKE '%$keyword%' OR
-                waktu_slot_akhir LIKE '%$keyword%' OR
-                slot_hari LIKE '%$keyword%'
+                waktu_slot_akhir LIKE '%$keyword%'
             ";
 
     $result = mysqli_query($conn, $query);
@@ -36,8 +35,6 @@ if( isset($_POST["cari"]) ) {
     </nav>
     
     <h1>Data slot waktu</h1>
-    <a href="add_slot_waktu.php">Tambah</a>
-    <br><br>
 
     <form action="" method="post">
         <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
@@ -51,7 +48,6 @@ if( isset($_POST["cari"]) ) {
                 <th>No</th>
                 <th>Jam awal</th>
                 <th>Jam akhir</th>
-                <th>Hari</th>
             </tr>
         </thead>
         
@@ -62,7 +58,6 @@ if( isset($_POST["cari"]) ) {
                 <td><?= $i++; ?></td>
                 <td><?= $data['waktu_slot_awal']; ?></td>
                 <td><?= $data['waktu_slot_akhir']; ?></td>
-                <td><?= $data['slot_hari']; ?></td>
             </tr>
             <?php endwhile; ?>
         </tbody>

@@ -66,9 +66,14 @@ if( isset($_POST["cari"]) ) {
                 <td><?= $data['username']; ?></td>
                 <td><?= $data['level_pengguna']; ?></td>
                 <td colspan="2">
+                <?php if ($data['level_pengguna'] != "admin" or $_SESSION['username'] == "admin") : ?>
                     <a href="update_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>">Edit</a> |
                     <a href="delete_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>" 
                         onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
+                <?php else : ?>
+                    <a role="link" aria-disabled="true">Edit</a> |
+                    <a role="link" aria-disabled="true">Delete</a>
+                <?php endif; ?>
                 </td>
             </tr>
             <?php endwhile; ?>

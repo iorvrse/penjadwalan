@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2023 at 01:40 PM
+-- Generation Time: Jun 04, 2023 at 07:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,13 +34,6 @@ CREATE TABLE `dosen` (
   `bidang_ilmu` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `dosen`
---
-
-INSERT INTO `dosen` (`id_dosen`, `nama`, `nip`, `bidang_ilmu`) VALUES
-(4, 'Saipul', 1231243, 'pengelasan');
-
 -- --------------------------------------------------------
 
 --
@@ -49,8 +42,9 @@ INSERT INTO `dosen` (`id_dosen`, `nama`, `nip`, `bidang_ilmu`) VALUES
 
 CREATE TABLE `jadwal` (
   `id_jadwal` int(11) NOT NULL,
-  `id_dosen` int(11) NOT NULL,
   `id_slot` int(11) NOT NULL,
+  `hari` varchar(20) NOT NULL,
+  `id_dosen` int(11) NOT NULL,
   `id_matakuliah` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

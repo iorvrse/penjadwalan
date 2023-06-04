@@ -7,13 +7,13 @@ if( !isset($_SESSION["login"]) ) {
 }
 
 require 'function.php';
-$result = mysqli_query($conn, "SELECT * FROM kelas INNER JOIN semester ON kelas.id_kelas = semester.id_semester");
+$result = mysqli_query($conn, "SELECT * FROM kelas INNER JOIN semester ON kelas.id_semester = semester.id_semester");
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
     
     $query = "SELECT * FROM kelas
-            INNER JOIN semester ON kelas.id_kelas = semester.id_semester
+            INNER JOIN semester ON kelas.id_semester = semester.id_semester
             WHERE kelas.kelas LIKE '%$keyword%' OR
                 semester.tahun LIKE '%$keyword%' OR
                 semester.semester LIKE '%$keyword%'

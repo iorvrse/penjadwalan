@@ -9,7 +9,7 @@ if( !isset($_SESSION["login"]) ) {
 require 'function.php';
 
 $id_kelas = $_GET['id_kelas'];
-$query = "SELECT * FROM kelas INNER JOIN semester ON kelas.id_kelas = semester.id_semester WHERE id_kelas = $id_kelas";
+$query = "SELECT * FROM kelas INNER JOIN semester ON kelas.id_semester = semester.id_semester WHERE id_kelas = $id_kelas";
 $result = mysqli_query($conn, $query);
 $data = mysqli_fetch_assoc($result);
 
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     $id_semester = $_POST['id_semester'];
     $id_kelas = $_POST['id_kelas'];
 
-    $query = "UPDATE kelas SET kelas='$kelas', id_semester='$id_semester' WHERE id_kelas=$id_kelas";
+    $query = "UPDATE kelas SET kelas='$kelas', id_semester=$id_semester WHERE id_kelas=$id_kelas";
     mysqli_query($conn, $query);
 
     if (mysqli_affected_rows($conn) > 0) {

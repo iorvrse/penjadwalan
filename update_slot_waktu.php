@@ -17,13 +17,11 @@ if (isset($_POST['submit'])) {
     
     $waktu_slot_awal = $_POST['waktu_slot_awal'];
     $waktu_slot_akhir = $_POST['waktu_slot_akhir'];
-    $slot_hari = $_POST['slot_hari'];
     $id_slot = $_POST['id_slot'];
 
     $query = "UPDATE slot_waktu SET
         waktu_slot_awal='$waktu_slot_awal',
-        waktu_slot_akhir='$waktu_slot_akhir',
-        slot_hari='$slot_hari'
+        waktu_slot_akhir='$waktu_slot_akhir'
         WHERE id_slot=$id_slot"
     ;
     mysqli_query($conn, $query);
@@ -71,16 +69,6 @@ if (isset($_POST['submit'])) {
             <li>
                 <label for="waktu_slot_akhir">Jam akhir:</label>
                 <input type="time" name="waktu_slot_akhir" id="waktu_slot_akhir" value="<?= $data['waktu_slot_akhir']; ?>">
-            </li>
-            <li>
-                <label for="slot_hari">Hari:</label>
-                <select name="slot_hari" id="slot_hari">
-                    <option value="senin" <?= $data['slot_hari'] == 'senin' ? 'selected' : ''; ?>>Senin</option>
-                    <option value="selasa" <?= $data['slot_hari'] == 'selasa' ? 'selected' : ''; ?>>Selasa</option>
-                    <option value="rabu" <?= $data['slot_hari'] == 'rabu' ? 'selected' : ''; ?>>Rabu</option>
-                    <option value="kamis" <?= $data['slot_hari'] == 'kamis' ? 'selected' : ''; ?>>Kamis</option>
-                    <option value="jumat" <?= $data['slot_hari'] == 'jumat' ? 'selected' : ''; ?>>Jumat</option>
-                </select>
             </li>
             <li>
                 <input type="hidden" name="id_slot" value="<?= $data['id_slot']; ?>">

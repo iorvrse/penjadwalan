@@ -8,7 +8,7 @@ if( !isset($_SESSION["login"]) ) {
 
 require 'function.php';
 
-$query = "SELECT * FROM kelas INNER JOIN semester ON kelas.id_kelas = semester.id_semester WHERE semester.status = '1'";
+$query = "SELECT * FROM kelas INNER JOIN semester ON kelas.id_semester = semester.id_semester WHERE semester.status = '1'";
 $result = mysqli_query($conn, $query);
 $data = mysqli_fetch_assoc($result);
 

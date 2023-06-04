@@ -4,7 +4,7 @@ session_start();
 require 'function.php';
 
 if( !isset($_SESSION["login"]) ) {
-	header("Location: login.php");
+	header("Location: ../login.php");
 	exit;
 }
 
@@ -41,9 +41,6 @@ $data = mysqli_fetch_assoc($result);
     </nav>
     <h1>Jadwal Kuliah</h1>
     <h2><?= 'Kelas ' . $data_kelas['kelas']; ?></h2>
-
-    <a href="add_jadwal.php?id_kelas=<?= $data_kelas['id_kelas']; ?>">Tambah</a>
-    <br><br>
     
     <table>
         <thead>
@@ -52,7 +49,6 @@ $data = mysqli_fetch_assoc($result);
                 <th>Hari</th>
                 <th>Dosen</th>
                 <th>Matakuliah</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -62,12 +58,6 @@ $data = mysqli_fetch_assoc($result);
                     <td><?= $data['hari']; ?></td>
                     <td><?= $data['dosen']; ?></td>
                     <td><?= $data['matakuliah']; ?></td>
-                    <td colspan="2">
-                        <a href="update_jadwal.php?id_jadwal=<?= $data['id_jadwal']; ?>">Edit</a> |
-                        <a href="delete_jadwal.php?id_jadwal=<?= $data['id_jadwal']; ?>"
-                            onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete
-                        </a>
-                    </td>
                 </tr>
             <?php endwhile; ?>
         </tbody>

@@ -61,11 +61,8 @@ if( isset($_POST["submit"]) ) {
             </li>
             <li>
                 <select name="level_pengguna" id="level_pengguna">
-                
-                <?php while ($data) :?>
-                    <option value="<?= $data['level_pengguna']; ?>"><?= $data['level_pengguna']; ?></option>
-                <?php endwhile; ?>
-                
+                    <option value="user">user</option>               
+                    <option value="admin">admin</option>               
                 </select>
                 <button type="submit" name="submit">Tambah</button>
             </li>

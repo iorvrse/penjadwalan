@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 if( !isset($_SESSION["login"]) ) {
@@ -7,14 +7,16 @@ if( !isset($_SESSION["login"]) ) {
 }
 
 require 'function.php';
-$result = mysqli_query($conn, "SELECT * FROM slot_waktu");
+
+$query = "SELECT * FROM kelas INNER JOIN semester ON kelas.id_semester = semester.id_semester WHERE semester.status = '1'";
+$result = mysqli_query($conn, $query);
+$data = mysqli_fetch_assoc($result);
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
     
-    $query = "SELECT * FROM slot_waktu WHERE
-                waktu_slot_awal LIKE '%$keyword%' OR
-                waktu_slot_akhir LIKE '%$keyword%' OR
+    $query = "SELECT * FROM kelas WHERE
+                kelas LIKE '%$keyword%'
             ";
 
     $result = mysqli_query($conn, $query);
@@ -32,11 +34,9 @@ if( isset($_POST["cari"]) ) {
 <body>
     <nav>
         <?php include 'navigation.php'; ?>
-    </nav>
-    
-    <h1>Data slot waktu</h1>
-    <a href="add_slot_waktu.php">Tambah</a>
-    <br><br>
+    </nav> 
+
+    <h1>Data jadwal</h1>
 
     <form action="" method="post">
         <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
@@ -48,23 +48,18 @@ if( isset($_POST["cari"]) ) {
         <thead>
             <tr>
                 <th>No</th>
-                <th>Jam awal</th>
-                <th>Jam akhir</th>
-                <th>Action</th>
+                <th>Kelas</th>
             </tr>
         </thead>
-        
+
         <tbody>
             <?php $i = 0; ?>
             <?php while ($data = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <td><?= $i++; ?></td>
-                <td><?= $data['waktu_slot_awal']; ?></td>
-                <td><?= $data['waktu_slot_akhir']; ?></td>
+                <td><?= $data['nama_jadwal']; ?></td>
                 <td colspan="2">
-                    <a href="update_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>">Edit</a> |
-                    <a href="delete_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>" 
-                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
+                    <a href="detail_jadwal.php?id_kelas=<?= $data['id_kelas']; ?>">Detail</a>
                 </td>
             </tr>
             <?php endwhile; ?>

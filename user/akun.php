@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
     if( mysqli_fetch_assoc($result) ) {
         echo "<script>
                 alert('Username sudah terdaftar!');
-                document.location.href = 'pengguna.php';
+                document.location.href = 'akun.php';
             </script>"
         ;
         exit;
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     if( $password !== $password2 ) {
         echo "<script>
                 alert('Konfirmasi password tidak sesuai!');
-                document.location.href = 'pengguna.php';
+                document.location.href = 'akun.php';
             </script>"
         ;
         exit;
@@ -56,14 +56,14 @@ if (isset($_POST['submit'])) {
             echo "
                 <script>
                     alert('data berhasil diubah!');
-                    document.location.href = 'pengguna.php';
+                    document.location.href = 'index.php';
                 </script>
             ";
         } else {
             echo "
                 <script>
                     alert('data gagal diubah!');
-                    document.location.href = 'pengguna.php';
+                    document.location.href = 'akun.php';
                 </script>
             ";
         }

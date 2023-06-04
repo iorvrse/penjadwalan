@@ -37,8 +37,6 @@ if( isset($_POST["cari"]) ) {
     </nav> 
 
     <h1>Data kelas</h1>
-    <a href="add_kelas.php">Tambah</a>
-    <br><br>
 
     <form action="" method="post">
         <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">

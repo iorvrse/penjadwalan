@@ -12,9 +12,8 @@ if( isset($_POST["submit"]) ) {
 
     $waktu_slot_awal = $_POST['waktu_slot_awal'];
     $waktu_slot_akhir = $_POST['waktu_slot_akhir'];
-    $slot_hari = $_POST['slot_hari'];
 
-    $query = "INSERT INTO slot_waktu VALUES ('', '$waktu_slot_awal', '$waktu_slot_akhir', '$slot_hari')";
+    $query = "INSERT INTO slot_waktu VALUES ('', '$waktu_slot_awal', '$waktu_slot_akhir')";
     
     mysqli_query($conn, $query);
 
@@ -61,16 +60,6 @@ if( isset($_POST["submit"]) ) {
             <li>
                 <label for="waktu_slot_akhir">Jam akhir:</label>
                 <input type="time" name="waktu_slot_akhir">
-            </li>
-            <li>
-                <label for="slot_hari">Hari:</label>
-                <select name="slot_hari" id="slot_hari">
-                    <option value="senin">Senin</option>
-                    <option value="selasa">Selasa</option>
-                    <option value="rabu">Rabu</option>
-                    <option value="kamis">Kamis</option>
-                    <option value="jumat">Jum'at</option>
-                </select>
             </li>
             <li>
                 <button type="submit" name="submit">Tambah</button>

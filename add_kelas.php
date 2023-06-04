@@ -17,7 +17,7 @@ if( isset($_POST["submit"]) ) {
     $kelas = $_POST['kelas'];
     $semester = $_POST['id_semester'];
 
-    $query = "INSERT INTO kelas VALUES ('', '$kelas', '$id_semester')";
+    $query = "INSERT INTO kelas VALUES ('', '$kelas', $id_semester)";
     
     mysqli_query($conn, $query);
 
