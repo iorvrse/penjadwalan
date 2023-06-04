@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2023 at 09:29 AM
+-- Generation Time: Jun 04, 2023 at 01:40 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -49,14 +49,22 @@ INSERT INTO `dosen` (`id_dosen`, `nama`, `nip`, `bidang_ilmu`) VALUES
 
 CREATE TABLE `jadwal` (
   `id_jadwal` int(11) NOT NULL,
-  `jumlah_mahasiswa` int(11) NOT NULL,
-  `status_jadwal` varchar(50) NOT NULL,
-  `progress_jadwal` varchar(50) NOT NULL,
-  `id_semester` int(11) NOT NULL,
-  `id_ruangan` varchar(10) NOT NULL,
   `id_dosen` int(11) NOT NULL,
   `id_slot` int(11) NOT NULL,
-  `kode_matakuliah` int(11) NOT NULL
+  `id_matakuliah` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kelas`
+--
+
+CREATE TABLE `kelas` (
+  `id_kelas` int(11) NOT NULL,
+  `kelas` varchar(30) NOT NULL,
+  `id_semester` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -66,11 +74,8 @@ CREATE TABLE `jadwal` (
 --
 
 CREATE TABLE `matakuliah` (
-  `kode_matakuliah` int(11) NOT NULL,
-  `nama_matakuliah` varchar(50) NOT NULL,
-  `semester` int(11) NOT NULL,
-  `jenis_matakuliah` varchar(50) NOT NULL,
-  `flag_aktif` varchar(15) NOT NULL
+  `id_matakuliah` int(11) NOT NULL,
+  `nama_matakuliah` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -97,35 +102,15 @@ INSERT INTO `pengguna` (`id_pengguna`, `username`, `password`, `nama_pengguna`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ruangan`
---
-
-CREATE TABLE `ruangan` (
-  `id_ruangan` varchar(10) NOT NULL,
-  `nama_ruangan` varchar(20) NOT NULL,
-  `kapasitas_ruangan` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `semester`
 --
 
 CREATE TABLE `semester` (
   `id_semester` int(11) NOT NULL,
   `tahun` varchar(50) NOT NULL,
-  `semester` varchar(20) NOT NULL,
-  `status` int(2) NOT NULL
+  `semester` enum('ganjil','genap') NOT NULL,
+  `status` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `semester`
---
-
-INSERT INTO `semester` (`id_semester`, `tahun`, `semester`, `status`) VALUES
-(2, '2090/2091', '4', 1),
-(3, '2092/2093', '5', 0);
 
 -- --------------------------------------------------------
 
@@ -137,15 +122,8 @@ CREATE TABLE `slot_waktu` (
   `id_slot` int(11) NOT NULL,
   `waktu_slot_awal` varchar(20) NOT NULL,
   `waktu_slot_akhir` varchar(20) NOT NULL,
-  `hari_slot` varchar(10) NOT NULL
+  `slot_hari` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `slot_waktu`
---
-
-INSERT INTO `slot_waktu` (`id_slot`, `waktu_slot_awal`, `waktu_slot_akhir`, `hari_slot`) VALUES
-(1, '8.00', '9.40', 'Selasa');
 
 --
 -- Indexes for dumped tables
@@ -162,29 +140,29 @@ ALTER TABLE `dosen`
 --
 ALTER TABLE `jadwal`
   ADD PRIMARY KEY (`id_jadwal`),
-  ADD KEY `id_semester` (`id_semester`),
-  ADD KEY `id_ruangan` (`id_ruangan`),
   ADD KEY `id_dosen` (`id_dosen`),
   ADD KEY `id_slot` (`id_slot`),
-  ADD KEY `kode_matakuliah` (`kode_matakuliah`);
+  ADD KEY `id_matakuliah` (`id_matakuliah`),
+  ADD KEY `id_kelas` (`id_kelas`);
+
+--
+-- Indexes for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD PRIMARY KEY (`id_kelas`),
+  ADD KEY `id_semester` (`id_semester`);
 
 --
 -- Indexes for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
-  ADD PRIMARY KEY (`kode_matakuliah`);
+  ADD PRIMARY KEY (`id_matakuliah`);
 
 --
 -- Indexes for table `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_pengguna`);
-
---
--- Indexes for table `ruangan`
---
-ALTER TABLE `ruangan`
-  ADD PRIMARY KEY (`id_ruangan`);
 
 --
 -- Indexes for table `semester`
@@ -215,10 +193,16 @@ ALTER TABLE `jadwal`
   MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `kelas`
+--
+ALTER TABLE `kelas`
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
-  MODIFY `kode_matakuliah` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
@@ -246,11 +230,16 @@ ALTER TABLE `slot_waktu`
 -- Constraints for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  ADD CONSTRAINT `jadwal_ibfk_1` FOREIGN KEY (`id_semester`) REFERENCES `semester` (`id_semester`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `jadwal_ibfk_2` FOREIGN KEY (`id_ruangan`) REFERENCES `ruangan` (`id_ruangan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `jadwal_ibfk_3` FOREIGN KEY (`id_slot`) REFERENCES `slot_waktu` (`id_slot`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `jadwal_ibfk_4` FOREIGN KEY (`kode_matakuliah`) REFERENCES `matakuliah` (`kode_matakuliah`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `jadwal_ibfk_5` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id_dosen`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `id_dosen` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id_dosen`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `id_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `id_matakuliah` FOREIGN KEY (`id_matakuliah`) REFERENCES `matakuliah` (`id_matakuliah`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `id_slot` FOREIGN KEY (`id_slot`) REFERENCES `slot_waktu` (`id_slot`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD CONSTRAINT `id_semester` FOREIGN KEY (`id_semester`) REFERENCES `semester` (`id_semester`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
