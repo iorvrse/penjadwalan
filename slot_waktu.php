@@ -46,25 +46,33 @@ if( isset($_POST["cari"]) ) {
     <br>
 
     <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>Jam awal</th>
-            <th>Jam akhir</th>
-            <th>Hari</th>
-            <th>Action</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Jam awal</th>
+                <th>Jam akhir</th>
+                <th>Hari</th>
+                <th>Action</th>
+            </tr>
+        </thead>
         
-        <?php while ($data = mysqli_fetch_assoc($result)): ?>
-        <tr>
-            <td><?= $data['waktu_slot_awal']; ?></td>
-            <td><?= $data['waktu_slot_akhir']; ?></td>
-            <td><?= $data['hari_slot']; ?></td>
-            <td colspan="2">
-                <a href="update_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>">Edit</a> |
-                <a href="delete_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>" 
-                    onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
-            </td>
-        </tr>
-        <?php endwhile; ?>
+        <tbody>
+            <?php $i = 0; ?>
+            <?php while ($data = mysqli_fetch_assoc($result)): ?>
+            <tr>
+                <td><?= $i++; ?></td>
+                <td><?= $data['waktu_slot_awal']; ?></td>
+                <td><?= $data['waktu_slot_akhir']; ?></td>
+                <td><?= $data['slot_hari']; ?></td>
+                <td colspan="2">
+                    <a href="update_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>">Edit</a> |
+                    <a href="delete_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>" 
+                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
     </table>
+
 </body>
 </html>

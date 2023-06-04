@@ -7,15 +7,16 @@ if( !isset($_SESSION["login"]) ) {
 }
 
 require 'function.php';
-$result = mysqli_query($conn, "SELECT * FROM dosen");
+$result = mysqli_query($conn, "SELECT * FROM pengguna");
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
     
-    $query = "SELECT * FROM dosen WHERE
-                nama LIKE '%$keyword%' OR
-                nip LIKE '%$keyword%' OR
-                bidang_ilmu LIKE '%$keyword%'
+    $query = "SELECT * FROM pengguna WHERE
+                username LIKE '%$keyword%' OR
+                password LIKE '%$keyword%' OR
+                level_pengguna LIKE '%$keyword%' OR
+                nama_pengguna LIKE '%$keyword%'
             ";
 
     $result = mysqli_query($conn, $query);
@@ -35,8 +36,8 @@ if( isset($_POST["cari"]) ) {
         <?php include 'navigation.php'; ?>
     </nav> 
 
-    <h1>Data Dosen</h1>
-    <a href="add_dosen.php">Tambah</a>
+    <h1>Data Pengguna</h1>
+    <a href="add_pengguna.php">Tambah</a>
     <br><br>
 
     <form action="" method="post">
@@ -50,8 +51,8 @@ if( isset($_POST["cari"]) ) {
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>NIP</th>
-                <th>Bidang Ilmu</th>
+                <th>Username</th>
+                <th>Level Pengguna</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -61,12 +62,12 @@ if( isset($_POST["cari"]) ) {
             <?php while ($data = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <td><?= $i++; ?></td>
-                <td><?= $data['nama']; ?></td>
-                <td><?= $data['nip']; ?></td>
-                <td><?= $data['bidang_ilmu']; ?></td>
+                <td><?= $data['nama_pengguna']; ?></td>
+                <td><?= $data['username']; ?></td>
+                <td><?= $data['level_pengguna']; ?></td>
                 <td colspan="2">
-                    <a href="update_dosen.php?id_dosen=<?= $data['id_dosen']; ?>">Edit</a> |
-                    <a href="delete_dosen.php?id_dosen=<?= $data['id_dosen']; ?>" 
+                    <a href="update_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>">Edit</a> |
+                    <a href="delete_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>" 
                         onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
                 </td>
             </tr>

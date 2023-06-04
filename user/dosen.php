@@ -2,7 +2,7 @@
 session_start();
 
 if( !isset($_SESSION["login"]) ) {
-	header("Location: login.php");
+	header("Location: ../login.php");
 	exit;
 }
 
@@ -36,8 +36,6 @@ if( isset($_POST["cari"]) ) {
     </nav> 
 
     <h1>Data Dosen</h1>
-    <a href="add_dosen.php">Tambah</a>
-    <br><br>
 
     <form action="" method="post">
         <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
@@ -52,10 +50,9 @@ if( isset($_POST["cari"]) ) {
                 <th>Nama</th>
                 <th>NIP</th>
                 <th>Bidang Ilmu</th>
-                <th>Action</th>
             </tr>
         </thead>
-
+        
         <tbody>
             <?php $i = 0; ?>
             <?php while ($data = mysqli_fetch_assoc($result)): ?>
@@ -64,11 +61,6 @@ if( isset($_POST["cari"]) ) {
                 <td><?= $data['nama']; ?></td>
                 <td><?= $data['nip']; ?></td>
                 <td><?= $data['bidang_ilmu']; ?></td>
-                <td colspan="2">
-                    <a href="update_dosen.php?id_dosen=<?= $data['id_dosen']; ?>">Edit</a> |
-                    <a href="delete_dosen.php?id_dosen=<?= $data['id_dosen']; ?>" 
-                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
-                </td>
             </tr>
             <?php endwhile; ?>
         </tbody>

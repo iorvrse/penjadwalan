@@ -2,7 +2,7 @@
 session_start();
 
 if( !isset($_SESSION["login"]) ) {
-	header("Location: login.php");
+	header("Location: ../login.php");
 	exit;
 }
 
@@ -36,8 +36,6 @@ if( isset($_POST["cari"]) ) {
     </nav>
 
     <h1>Data Semester</h1>
-    <a href="add_semester.php">Tambah</a>
-    <br><br>
 
     <form action="" method="post">
         <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
@@ -52,10 +50,9 @@ if( isset($_POST["cari"]) ) {
                 <th>Tahun</th>
                 <th>Semester</th>
                 <th>Status</th>
-                <th colspan="2">Action</th>
             </tr>
         </thead>
-        
+
         <tbody>
             <?php $i = 0; ?>
             <?php while ($data = mysqli_fetch_assoc($result)): ?>
@@ -63,19 +60,7 @@ if( isset($_POST["cari"]) ) {
                 <td><?= $i++; ?></td>
                 <td><?= $data['tahun']; ?></td>
                 <td><?= $data['semester']; ?></td>
-                <td><?= $data['status'] == '1' ? 'aktif': 'tidak aktif'; ?></td>
-                <td>
-                    <button type="button">
-                        <a href="update_semester_aktivasi.php?id_semester=<?= $data['id_semester']; ?>&status=<?= $data['status']; ?>">
-                            ubah status
-                        </a>
-                    </button>
-                </td>
-                <td colspan="2">
-                    <a href="update_semester.php?id_semester=<?= $data['id_semester']; ?>">Edit</a> |
-                    <a href="delete_semester.php?id_semester=<?= $data['id_semester']; ?>" 
-                    onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
-                </td>
+                <td><?= $data['status'] == 1 ? 'aktif': 'tidak aktif'; ?></td>
             </tr>
             <?php endwhile; ?>
         </tbody>

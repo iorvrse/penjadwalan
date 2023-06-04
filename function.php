@@ -27,7 +27,7 @@ function registrasi($data) {
 
     if( mysqli_fetch_assoc($result) ) {
         echo "<script>
-                alert('Username sudah terdaftar!')
+                alert('Username sudah terdaftar!');
             </script>"
         ;
         return false;

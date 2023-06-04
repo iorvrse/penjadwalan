@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if( !isset($_SESSION["login"]) ) {
-	header("Location: login.php");
+if ( !isset($_SESSION["login"]) ) {
+	header("Location: ../login.php");
 	exit;
 }
 
@@ -23,6 +23,6 @@ require 'function.php';
         <?php include 'navigation.php'; ?>
     </nav>
     <h1>Aplikasi Penjadwalan</h1>
-    
+
 </body>
 </html>

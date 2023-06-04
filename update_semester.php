@@ -16,7 +16,7 @@ $data = mysqli_fetch_assoc($result);
 if (isset($_POST['submit'])) {
     
     $tahun = htmlspecialchars($_POST['tahun']);
-    $semester = htmlspecialchars($_POST['semester']);
+    $semester = $_POST['semester'];
     $id_semester = $_POST['id_semester'];
 
     $query = "UPDATE semester SET tahun='$tahun', semester='$semester' WHERE id_semester=$id_semester";
@@ -64,7 +64,10 @@ if (isset($_POST['submit'])) {
             </li>
             <li>
                 <label for="semester">Semester:</label>
-                <input type="text" name="semester" id="semester" value="<?= $data['semester']; ?>">
+                <select name="semester" id="semester">
+                    <option value="ganjil" <?= $data['semester'] == 'ganjil' ? 'selected' : ''; ?>>ganjil</option>
+                    <option value="genap" <?= $data['semester'] == 'genap' ? 'selected' : ''; ?>>genap</option>
+                </select>
             </li>
             <li>
                 <input type="hidden" name="id_semester" value="<?= $data['id_semester']; ?>">

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 if( !isset($_SESSION["login"]) ) {
@@ -8,13 +8,16 @@ if( !isset($_SESSION["login"]) ) {
 
 require 'function.php';
 
+$query = "SELECT * FROM semester";
+$result = mysqli_query($conn, $query);
+$data = mysqli_fetch_assoc($result);
+
 if( isset($_POST["submit"]) ) {
 
-    $waktu_slot_awal = $_POST['waktu_slot_awal'];
-    $waktu_slot_akhir = $_POST['waktu_slot_akhir'];
-    $slot_hari = $_POST['slot_hari'];
+    $kelas = $_POST['kelas'];
+    $semester = $_POST['id_semester'];
 
-    $query = "INSERT INTO slot_waktu VALUES ('', '$waktu_slot_awal', '$waktu_slot_akhir', '$slot_hari')";
+    $query = "INSERT INTO kelas VALUES ('', '$kelas', '$id_semester')";
     
     mysqli_query($conn, $query);
 
@@ -23,14 +26,14 @@ if( isset($_POST["submit"]) ) {
         echo "
             <script>
                 alert('data berhasil ditambahkan!');
-                document.location.href = 'slot_waktu.php';
+                document.location.href = 'kelas.php';
             </script>
         ";
     } else {
         echo "
             <script>
                 alert('data gagal ditambahkan!');
-                document.location.href = 'slot_waktu.php';
+                document.location.href = 'kelas.php';
             </script>
         ";
     }
@@ -50,26 +53,21 @@ if( isset($_POST["submit"]) ) {
     <nav>
         <?php include 'navigation.php'; ?>
     </nav>
-    
-    <h1>Tambah Data Slot Waktu</h1>
+    <h1>Tambah Data Kelas</h1>
     <form action="" method="post">
         <ul>
             <li>
-                <label for="waktu_slot_awal">Jam mulai:</label>
-                <input type="time" name="waktu_slot_awal">
+                <label for="kelas">Kelas:</label>
+                <input type="text" name="kelas">
             </li>
             <li>
-                <label for="waktu_slot_akhir">Jam akhir:</label>
-                <input type="time" name="waktu_slot_akhir">
-            </li>
-            <li>
-                <label for="slot_hari">Hari:</label>
-                <select name="slot_hari" id="slot_hari">
-                    <option value="senin">Senin</option>
-                    <option value="selasa">Selasa</option>
-                    <option value="rabu">Rabu</option>
-                    <option value="kamis">Kamis</option>
-                    <option value="jumat">Jum'at</option>
+                <label for="id_semester">Tahun / Semester:</label>
+                <select name="id_semester" id="id_semester">
+                    
+                <?php while ($data) : ?>
+                    <option value="<?= $data['id_semester']; ?>"><?= $data['tahun'] . " " . $data['semester']; ?></option>
+                <?php endwhile; ?>
+
                 </select>
             </li>
             <li>

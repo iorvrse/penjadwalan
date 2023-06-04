@@ -1,6 +1,6 @@
 <ul>
+    <li><a href="pengguna.php">Akun</a></li>
     <li><a href="index.php">Dashboard</a></li>
-    <li><a href="pengguna.php">Users</a></li>
     <li><a href="dosen.php">Dosen</a></li>
     <li><a href="matakuliah.php">Matakuliah</a></li>
     <li><a href="semester.php">Semester</a></li>

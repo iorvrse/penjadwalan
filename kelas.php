@@ -7,15 +7,16 @@ if( !isset($_SESSION["login"]) ) {
 }
 
 require 'function.php';
-$result = mysqli_query($conn, "SELECT * FROM dosen");
+$result = mysqli_query($conn, "SELECT * FROM kelas INNER JOIN semester ON kelas.id_kelas = semester.id_semester");
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
     
-    $query = "SELECT * FROM dosen WHERE
-                nama LIKE '%$keyword%' OR
-                nip LIKE '%$keyword%' OR
-                bidang_ilmu LIKE '%$keyword%'
+    $query = "SELECT * FROM kelas
+            INNER JOIN semester ON kelas.id_kelas = semester.id_semester
+            WHERE kelas.kelas LIKE '%$keyword%' OR
+                semester.tahun LIKE '%$keyword%' OR
+                semester.semester LIKE '%$keyword%'
             ";
 
     $result = mysqli_query($conn, $query);
@@ -35,8 +36,8 @@ if( isset($_POST["cari"]) ) {
         <?php include 'navigation.php'; ?>
     </nav> 
 
-    <h1>Data Dosen</h1>
-    <a href="add_dosen.php">Tambah</a>
+    <h1>Data kelas</h1>
+    <a href="add_kelas.php">Tambah</a>
     <br><br>
 
     <form action="" method="post">
@@ -49,9 +50,8 @@ if( isset($_POST["cari"]) ) {
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>NIP</th>
-                <th>Bidang Ilmu</th>
+                <th>Kelas</th>
+                <th>Tahun / Semester</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -61,18 +61,17 @@ if( isset($_POST["cari"]) ) {
             <?php while ($data = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <td><?= $i++; ?></td>
-                <td><?= $data['nama']; ?></td>
-                <td><?= $data['nip']; ?></td>
-                <td><?= $data['bidang_ilmu']; ?></td>
+                <td><?= $data['kelas']; ?></td>
+                <td><?= $data['tahun'] . " " . $data['semester']; ?></td>
                 <td colspan="2">
-                    <a href="update_dosen.php?id_dosen=<?= $data['id_dosen']; ?>">Edit</a> |
-                    <a href="delete_dosen.php?id_dosen=<?= $data['id_dosen']; ?>" 
+                    <a href="update_kelas.php?id_kelas=<?= $data['id_kelas']; ?>">Edit</a> |
+                    <a href="delete_kelas.php?id_kelas=<?= $data['id_kelas']; ?>" 
                         onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
                 </td>
             </tr>
             <?php endwhile; ?>
         </tbody>
     </table>
-
+    
 </body>
 </html>

@@ -10,10 +10,9 @@ require 'function.php';
 
 if( isset($_POST["submit"]) ) {
 
-    $tahun = $_POST['tahun'];
-    $semester = $_POST['semester'];
+    $nama_matakuliah = $_POST['nama_matakuliah'];
 
-    $query = "INSERT INTO semester VALUES ('', '$tahun', '$semester', '0')";
+    $query = "INSERT INTO matakuliah VALUES ('', '$nama_matakuliah')";
     
     mysqli_query($conn, $query);
 
@@ -22,14 +21,14 @@ if( isset($_POST["submit"]) ) {
         echo "
             <script>
                 alert('data berhasil ditambahkan!');
-                document.location.href = 'semester.php';
+                document.location.href = 'matakuliah.php';
             </script>
         ";
     } else {
         echo "
             <script>
                 alert('data gagal ditambahkan!');
-                document.location.href = 'semester.php';
+                document.location.href = 'matakuliah.php';
             </script>
         ";
     }
@@ -49,20 +48,12 @@ if( isset($_POST["submit"]) ) {
     <nav>
         <?php include 'navigation.php'; ?>
     </nav>
-    
-    <h1>Tambah Data semester</h1>
+    <h1>Tambah Data Matakuliah</h1>
     <form action="" method="post">
         <ul>
             <li>
-                <label for="tahun">Tahun:</label>
-                <input type="text" name="tahun">
-            </li>
-            <li>
-                <label for="semester">Semester:</label>
-                <select name="semester" id="semester">
-                    <option value="ganjil">ganjil</option>
-                    <option value="genap">genap</option>
-                </select>
+                <label for="nama_matakuliah">Matakuliah:</label>
+                <input type="text" name="nama_matakuliah">
             </li>
             <li>
                 <button type="submit" name="submit">Tambah</button>

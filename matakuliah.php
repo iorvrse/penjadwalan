@@ -7,15 +7,13 @@ if( !isset($_SESSION["login"]) ) {
 }
 
 require 'function.php';
-$result = mysqli_query($conn, "SELECT * FROM dosen");
+$result = mysqli_query($conn, "SELECT * FROM matakuliah");
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
     
-    $query = "SELECT * FROM dosen WHERE
-                nama LIKE '%$keyword%' OR
-                nip LIKE '%$keyword%' OR
-                bidang_ilmu LIKE '%$keyword%'
+    $query = "SELECT * FROM matakuliah WHERE
+                nama_matakuliah LIKE '%$keyword%'
             ";
 
     $result = mysqli_query($conn, $query);
@@ -35,8 +33,8 @@ if( isset($_POST["cari"]) ) {
         <?php include 'navigation.php'; ?>
     </nav> 
 
-    <h1>Data Dosen</h1>
-    <a href="add_dosen.php">Tambah</a>
+    <h1>Data matakuliah</h1>
+    <a href="add_matakuliah.php">Tambah</a>
     <br><br>
 
     <form action="" method="post">
@@ -49,9 +47,7 @@ if( isset($_POST["cari"]) ) {
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>NIP</th>
-                <th>Bidang Ilmu</th>
+                <th>Mata Kuliah</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -61,12 +57,10 @@ if( isset($_POST["cari"]) ) {
             <?php while ($data = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <td><?= $i++; ?></td>
-                <td><?= $data['nama']; ?></td>
-                <td><?= $data['nip']; ?></td>
-                <td><?= $data['bidang_ilmu']; ?></td>
+                <td><?= $data['nama_matakuliah']; ?></td>
                 <td colspan="2">
-                    <a href="update_dosen.php?id_dosen=<?= $data['id_dosen']; ?>">Edit</a> |
-                    <a href="delete_dosen.php?id_dosen=<?= $data['id_dosen']; ?>" 
+                    <a href="update_matakuliah.php?id_matakuliah=<?= $data['id_matakuliah']; ?>">Edit</a> |
+                    <a href="delete_matakuliah.php?id_matakuliah=<?= $data['id_matakuliah']; ?>" 
                         onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
                 </td>
             </tr>

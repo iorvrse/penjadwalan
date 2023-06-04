@@ -1,21 +1,21 @@
-<?php
+<?php 
 session_start();
 
 if( !isset($_SESSION["login"]) ) {
-	header("Location: login.php");
+	header("Location: ../login.php");
 	exit;
 }
 
 require 'function.php';
-$result = mysqli_query($conn, "SELECT * FROM dosen");
+$result = mysqli_query($conn, "SELECT * FROM slot_waktu");
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
     
-    $query = "SELECT * FROM dosen WHERE
-                nama LIKE '%$keyword%' OR
-                nip LIKE '%$keyword%' OR
-                bidang_ilmu LIKE '%$keyword%'
+    $query = "SELECT * FROM slot_waktu WHERE
+                waktu_slot_awal LIKE '%$keyword%' OR
+                waktu_slot_akhir LIKE '%$keyword%' OR
+                slot_hari LIKE '%$keyword%'
             ";
 
     $result = mysqli_query($conn, $query);
@@ -33,10 +33,10 @@ if( isset($_POST["cari"]) ) {
 <body>
     <nav>
         <?php include 'navigation.php'; ?>
-    </nav> 
-
-    <h1>Data Dosen</h1>
-    <a href="add_dosen.php">Tambah</a>
+    </nav>
+    
+    <h1>Data slot waktu</h1>
+    <a href="add_slot_waktu.php">Tambah</a>
     <br><br>
 
     <form action="" method="post">
@@ -49,26 +49,20 @@ if( isset($_POST["cari"]) ) {
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>NIP</th>
-                <th>Bidang Ilmu</th>
-                <th>Action</th>
+                <th>Jam awal</th>
+                <th>Jam akhir</th>
+                <th>Hari</th>
             </tr>
         </thead>
-
+        
         <tbody>
             <?php $i = 0; ?>
             <?php while ($data = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <td><?= $i++; ?></td>
-                <td><?= $data['nama']; ?></td>
-                <td><?= $data['nip']; ?></td>
-                <td><?= $data['bidang_ilmu']; ?></td>
-                <td colspan="2">
-                    <a href="update_dosen.php?id_dosen=<?= $data['id_dosen']; ?>">Edit</a> |
-                    <a href="delete_dosen.php?id_dosen=<?= $data['id_dosen']; ?>" 
-                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
-                </td>
+                <td><?= $data['waktu_slot_awal']; ?></td>
+                <td><?= $data['waktu_slot_akhir']; ?></td>
+                <td><?= $data['slot_hari']; ?></td>
             </tr>
             <?php endwhile; ?>
         </tbody>

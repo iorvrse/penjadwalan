@@ -7,15 +7,16 @@ if( !isset($_SESSION["login"]) ) {
 }
 
 require 'function.php';
-$result = mysqli_query($conn, "SELECT * FROM dosen");
+
+$query = "SELECT * FROM kelas INNER JOIN semester ON kelas.id_kelas = semester.id_semester WHERE semester.status = '1'";
+$result = mysqli_query($conn, $query);
+$data = mysqli_fetch_assoc($result);
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
     
-    $query = "SELECT * FROM dosen WHERE
-                nama LIKE '%$keyword%' OR
-                nip LIKE '%$keyword%' OR
-                bidang_ilmu LIKE '%$keyword%'
+    $query = "SELECT * FROM kelas WHERE
+                kelas LIKE '%$keyword%'
             ";
 
     $result = mysqli_query($conn, $query);
@@ -35,8 +36,8 @@ if( isset($_POST["cari"]) ) {
         <?php include 'navigation.php'; ?>
     </nav> 
 
-    <h1>Data Dosen</h1>
-    <a href="add_dosen.php">Tambah</a>
+    <h1>Data jadwal</h1>
+    <a href="add_jadwal.php">Tambah</a>
     <br><br>
 
     <form action="" method="post">
@@ -49,9 +50,7 @@ if( isset($_POST["cari"]) ) {
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>NIP</th>
-                <th>Bidang Ilmu</th>
+                <th>Kelas</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -61,13 +60,9 @@ if( isset($_POST["cari"]) ) {
             <?php while ($data = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <td><?= $i++; ?></td>
-                <td><?= $data['nama']; ?></td>
-                <td><?= $data['nip']; ?></td>
-                <td><?= $data['bidang_ilmu']; ?></td>
+                <td><?= $data['nama_jadwal']; ?></td>
                 <td colspan="2">
-                    <a href="update_dosen.php?id_dosen=<?= $data['id_dosen']; ?>">Edit</a> |
-                    <a href="delete_dosen.php?id_dosen=<?= $data['id_dosen']; ?>" 
-                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
+                    <a href="detail_jadwal.php?id_kelas=<?= $data['id_kelas']; ?>">Detail</a>
                 </td>
             </tr>
             <?php endwhile; ?>

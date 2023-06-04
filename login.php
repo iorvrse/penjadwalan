@@ -1,8 +1,11 @@
 <?php 
 session_start();
 
-if( isset($_SESSION['login']) ) {
-	header("Location: index.php");
+if ( isset($_SESSION['login']) and $_SESSION['level_pengguna'] != "admin" ) {
+	header("Location: user/index.php");
+	exit;
+} elseif ( isset($_SESSION['login']) ) {
+    header("Location: index.php");
 	exit;
 }
 
@@ -26,8 +29,13 @@ if (isset($_POST['login'])) {
             $_SESSION['username'] = $username;
             $_SESSION['level_pengguna'] = $row['level_pengguna'];
             
-            header("Location: index.php");
-            exit;
+            if ( $row['level_pengguna'] != "admin" ) {
+                header("Location: user/index.php");
+                exit;
+            } else {
+                header("Location: index.php");
+                exit;
+            }
         }
 
     }
