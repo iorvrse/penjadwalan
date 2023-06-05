@@ -60,7 +60,7 @@ $data = mysqli_fetch_assoc($result);
                 </div>
 
                 <div class="row mb-4">
-                    <a href="add_jadwal.php?id_kelas=<?= $data_kelas['id_kelas']; ?>">Tambah</a>
+                    <a class="btn btn-primary" role="button" href="add_jadwal.php?id_kelas=<?= $data_kelas['id_kelas']; ?>">Tambah</a>
                 </div>
 
                 <div class="row mb-4">

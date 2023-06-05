@@ -49,7 +49,7 @@ if( isset($_POST["cari"]) ) {
                 </div>
 
                 <div class="row mb-4">
-                    <a href="add_matakuliah.php">Tambah</a>
+                    <a class="btn btn-primary" role="button" href="add_matakuliah.php">Tambah</a>
                 </div>
 
                 <div class="row mb-4">

@@ -19,7 +19,7 @@ if (mysqli_num_rows($result) > 0) {
         mysqli_query($conn, $query);
     } else {
         echo "<script>
-                alert 'non-aktifkan semester yang sedang aktif terlebih dahulu';
+                alert('non-aktifkan semester yang sedang aktif terlebih dahulu');
             <script>"
         ;
         header('Location: semester.php');
