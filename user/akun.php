@@ -106,11 +106,11 @@ if (isset($_POST['submit'])) {
                         <ul>
                             <li>
                                 <label for="nama_pengguna">Nama:</label>
-                                <input type="text" name="nama_pengguna" id="nama_pengguna" value="<?= $data['nama_pengguna']; ?>" disabled>
+                                <input type="text" name="nama_pengguna" id="nama_pengguna" value="<?= $data['nama_pengguna']; ?>">
                             </li>
                             <li>
                                 <label for="username">Username:</label>
-                                <input type="text" name="username" id="username" value="<?= $data['username']; ?>" disabled>
+                                <input type="text" name="username" id="username" value="<?= $data['username']; ?>">
                             </li>
                             <li>
                                 <label for="password_lama">Password lama:</label>
