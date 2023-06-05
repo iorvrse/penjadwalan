@@ -20,11 +20,11 @@ if (mysqli_num_rows($result) > 0) {
     } else {
         echo "<script>
                 alert('non-aktifkan semester yang sedang aktif terlebih dahulu');
-            <script>"
+                document.location.href = 'semester.php';
+            </script>"
         ;
-        header('Location: semester.php');
     }
-} else{
+} else {
     $status = $status == 0 ? 1 : 0;
     $query = "UPDATE semester SET status='$status' WHERE id_semester='$id_semester'";
     mysqli_query($conn, $query);

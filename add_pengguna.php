@@ -33,7 +33,7 @@ if( isset($_POST["submit"]) ) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Aplikasi Penjadwalan</title>
     
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -79,7 +79,9 @@ if( isset($_POST["submit"]) ) {
                                     <option value="user">user</option>               
                                     <option value="admin">admin</option>               
                                 </select>
-                                <button type="submit" name="submit">Tambah</button>
+                            </li>
+                            <li>
+                                <button class="btn btn-outline-primary" type="submit" name="submit">Tambah</button>
                             </li>
                         </ul>
                     </form>
@@ -87,7 +89,7 @@ if( isset($_POST["submit"]) ) {
             </div>
         </div>
     </div>
-    
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

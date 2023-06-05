@@ -19,7 +19,7 @@ $query = "SELECT * FROM jadwal
             ON jadwal.id_matakuliah = matakuliah.id_matakuliah
             INNER JOIN kelas
             ON jadwal.id_kelas = kelas.id_kelas
-            WHERE jadwal.id_kelas = $id_jadwal
+            WHERE jadwal.id_jadwal = $id_jadwal
         ";
 
 $result = mysqli_query($conn, $query);
@@ -34,7 +34,7 @@ if( isset($_POST["submit"]) ) {
     $id_matakuliah = $_POST['id_matakuliah'];
     $hari = $_POST['hari'];
 
-    $query = "UPDATE jadwal SET id_jadwal=$id_jadwal, hari='$hari', id_slot=$id_slot, id_dosen=$id_dosen, id_matakuliah=$id_matakuliah, id_kelas=$id_kelas)";
+    $query = "UPDATE jadwal SET id_jadwal=$id_jadwal, hari='$hari', id_slot=$id_slot, id_dosen=$id_dosen, id_matakuliah=$id_matakuliah, id_kelas=$id_kelas";
     
     mysqli_query($conn, $query);
 
@@ -64,7 +64,7 @@ if( isset($_POST["submit"]) ) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Aplikasi Penjadwalan</title>
     
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -92,14 +92,15 @@ if( isset($_POST["submit"]) ) {
                             <li>
                                 <label for="id_slot">Jam:</label>
                                 <select name="id_slot" id="id_slot">
-                                    <option value="<?= $data['id_slot']; ?>"><?= $data['slot_waktu_awal'] . "-" . $data['slot_waktu_akhir']; ?></option>
+                                    <option value="<?= $data['id_slot']; ?>"><?= $data['waktu_slot_awal'] . "-" . $data['waktu_slot_akhir']; ?></option>
                                     <?php 
                                         $get_waktu = mysqli_query($conn, "SELECT * FROM slot_waktu");
-                                        $waktu = mysqli_fetch_assoc($get_waktu);
                                     ?>
-                                    <?php while ($waktu) : ?>
-                                        <?php if ($waktu['id_slot'] != $data['id_slot']) : ?>
-                                        <option value="<?= $waktu['id_slot']; ?>"><?= $waktu['slot_waktu_awal'] . "-" . $waktu['slot_waktu_akhir']; ?></option>
+                                    <?php while ($waktu = mysqli_fetch_assoc($get_waktu)) : ?>
+                                        <?php if ($waktu['id_slot'] == $data['id_slot']) : ?>
+                                        <option value="<?= $waktu['id_slot']; ?>" selected><?= $waktu['waktu_slot_awal'] . "-" . $waktu['waktu_slot_akhir']; ?></option>
+                                        <?php else : ?>
+                                        <option value="<?= $waktu['id_slot']; ?>"><?= $waktu['waktu_slot_awal'] . "-" . $waktu['waktu_slot_akhir']; ?></option>
                                         <?php endif; ?>
                                     <?php endwhile; ?>
                                 </select>
@@ -120,9 +121,8 @@ if( isset($_POST["submit"]) ) {
                                     <option value="<?= $data['nama']; ?>"><?= $data['nama'] ?></option>
                                     <?php 
                                         $get_nama = mysqli_query($conn, "SELECT * FROM dosen");
-                                        $nama = mysqli_fetch_assoc($get_nama);
                                     ?>
-                                    <?php while ($nama) : ?>
+                                    <?php while ($nama = mysqli_fetch_assoc($get_nama)) : ?>
                                         <?php if ($nama['id_dosen'] != $data['id_jadwal']) : ?>
                                         <option value="<?= $nama['id_dosen']; ?>"><?= $nama['nama']; ?></option>
                                         <?php endif; ?>
@@ -135,9 +135,8 @@ if( isset($_POST["submit"]) ) {
                                     <option value="<?= $data['id_matakuliah']; ?>"><?= $data['nama_matakuliah'] ?></option>
                                     <?php 
                                         $get_matakuliah = mysqli_query($conn, "SELECT * FROM matakuliah");
-                                        $matakuliah = mysqli_fetch_assoc($get_matakuliah);
                                     ?>
-                                    <?php while ($matakuliah) : ?>
+                                    <?php while ($matakuliah = mysqli_fetch_assoc($get_matakuliah)) : ?>
                                         <?php if ($matakuliah['id_matakuliah'] != $data['id_matakuliah']) : ?>
                                         <option value="<?= $matakuliah['id_matakuliah']; ?>"><?= $matakuliah['nama_matakuliah']; ?></option>
                                         <?php endif; ?>
@@ -147,7 +146,7 @@ if( isset($_POST["submit"]) ) {
                             <li>
                                 <input type="hidden" name="id_kelas" value="<?= $data['id_kelas']; ?>">
                                 <input type="hidden" name="id_jadwal" value="<?= $data['id_jadwal']; ?>">
-                                <button type="submit" name="submit">Edit</button>
+                                <button class="btn btn-outline-primary" type="submit" name="submit">Edit</button>
                             </li>
                         </ul>
                     </form>
@@ -155,7 +154,7 @@ if( isset($_POST["submit"]) ) {
             </div>
         </div>
     </div>
-    
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

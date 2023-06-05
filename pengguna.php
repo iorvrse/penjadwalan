@@ -30,7 +30,7 @@ if( isset($_POST["cari"]) ) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <title>Aplikasi Penjadwalan</title>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -70,7 +70,7 @@ if( isset($_POST["cari"]) ) {
                                 <th>Nama</th>
                                 <th>Username</th>
                                 <th>Level Pengguna</th>
-                                <th>Action</th>
+                                <th colspan="2">Action</th>
                             </tr>
                         </thead>
 
@@ -83,17 +83,16 @@ if( isset($_POST["cari"]) ) {
                                 <td><?= $data['username']; ?></td>
                                 <td><?= $data['level_pengguna']; ?></td>
                                 <td colspan="2">
-                                <?php if ($data['username'] == "admin") : ?>
-                                    <a role="link" aria-disabled="true">Edit</a> |
-                                    <a role="link" aria-disabled="true">Delete</a>
-                                <?php elseif ($data['level_pengguna'] != "admin") : ?>
-                                    <a href="update_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>">Edit</a> |
-                                    <a href="delete_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>" 
-                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete
-                                    </a>
+                                <?php if ($_SESSION['username'] == "admin" && $data['username'] != "admin") : ?>
+                                    <a class="btn btn-outline-success" role="button" href="update_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>">Edit</a> 
+                                    <a class="btn btn-outline-danger" role="button" href="delete_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>"
+                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
+                                <?php elseif ($data['username'] == "admin") : ?>
+                                    <a class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Edit</a> 
+                                    <a class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Delete</a>
                                 <?php else : ?>
-                                    <a role="link" aria-disabled="true">Edit</a> |
-                                    <a role="link" aria-disabled="true">Delete</a>
+                                    <a class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Edit</a> 
+                                    <a class="btn btn-outline-secondary disabled" role="button" aria-disabled="true">Delete</a>
                                 <?php endif; ?>
                                 </td>
                             </tr>

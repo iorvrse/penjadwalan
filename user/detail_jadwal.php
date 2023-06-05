@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'function.php';
+require '../function.php';
 
 if( !isset($_SESSION["login"]) ) {
 	header("Location: ../login.php");
@@ -33,7 +33,7 @@ $data = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Aplikasi Penjadwalan</title>
     
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link

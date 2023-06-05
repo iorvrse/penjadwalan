@@ -10,7 +10,6 @@ require 'function.php';
 
 $query = "SELECT * FROM kelas INNER JOIN semester ON kelas.id_semester = semester.id_semester WHERE semester.status = '1'";
 $result = mysqli_query($conn, $query);
-$data = mysqli_fetch_assoc($result);
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
@@ -30,7 +29,7 @@ if( isset($_POST["cari"]) ) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <title>Aplikasi Penjadwalan</title>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -73,9 +72,9 @@ if( isset($_POST["cari"]) ) {
                             <?php while ($data = mysqli_fetch_assoc($result)): ?>
                             <tr>
                                 <td><?= $i++; ?></td>
-                                <td><?= $data['nama_jadwal']; ?></td>
-                                <td colspan="2">
-                                    <a href="detail_jadwal.php?id_kelas=<?= $data['id_kelas']; ?>">Detail</a>
+                                <td><?= $data['kelas']; ?></td>
+                                <td>
+                                    <a class="btn btn-outline-success" role="button" href="detail_jadwal.php?id_kelas=<?= $data['id_kelas']; ?>">Detail</a>
                                 </td>
                             </tr>
                             <?php endwhile; ?>

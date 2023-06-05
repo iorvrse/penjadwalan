@@ -24,7 +24,6 @@ $query = "SELECT * FROM jadwal
             WHERE jadwal.id_kelas = $id_kelas
         ";
 $result = mysqli_query($conn, $query);
-$data = mysqli_fetch_assoc($result);
 
 ?>
 
@@ -33,7 +32,7 @@ $data = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Aplikasi Penjadwalan</title>
     
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -52,7 +51,7 @@ $data = mysqli_fetch_assoc($result);
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-                    <h1 class="text-gray-800">Aplikasi Penjadwalan</h1>
+                    <h1 class="text-gray-800">Jadwal</h1>
                 </div>
 
                 <div class="row mb-4">
@@ -64,7 +63,7 @@ $data = mysqli_fetch_assoc($result);
                 </div>
 
                 <div class="row mb-4">
-                    <table>
+                    <table border="1" cellpadding="10" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Jam</th>
@@ -75,15 +74,15 @@ $data = mysqli_fetch_assoc($result);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($data) : ?>
+                            <?php while ($data = mysqli_fetch_assoc($result)) : ?>
                                 <tr>
                                     <td><?= $data['waktu_slot_awal'] . "-" . $data['waktu_slot_akhir']; ?></td>
                                     <td><?= $data['hari']; ?></td>
-                                    <td><?= $data['dosen']; ?></td>
-                                    <td><?= $data['matakuliah']; ?></td>
+                                    <td><?= $data['nama']; ?></td>
+                                    <td><?= $data['nama_matakuliah']; ?></td>
                                     <td colspan="2">
-                                        <a href="update_jadwal.php?id_jadwal=<?= $data['id_jadwal']; ?>">Edit</a> |
-                                        <a href="delete_jadwal.php?id_jadwal=<?= $data['id_jadwal']; ?>"
+                                        <a class="btn btn-outline-success" role="button" href="update_jadwal.php?id_jadwal=<?= $data['id_jadwal']; ?>">Edit</a> 
+                                        <a class="btn btn-outline-danger" role="button" href="delete_jadwal.php?id_jadwal=<?= $data['id_jadwal']; ?>"
                                             onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete
                                         </a>
                                     </td>

@@ -29,6 +29,7 @@ if( isset($_POST["cari"]) ) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Penjadwalan</title>
     
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -82,15 +83,13 @@ if( isset($_POST["cari"]) ) {
                                 <td><?= $data['semester']; ?></td>
                                 <td><?= $data['status'] == '1' ? 'aktif': 'tidak aktif'; ?></td>
                                 <td>
-                                    <button type="button">
-                                        <a href="update_semester_aktivasi.php?id_semester=<?= $data['id_semester']; ?>&status=<?= $data['status']; ?>">
-                                            ubah status
-                                        </a>
-                                    </button>
+                                    <a class="btn btn-outline-success" role="button" href="update_semester_aktivasi.php?id_semester=<?= $data['id_semester']; ?>&status=<?= $data['status']; ?>">
+                                        <i class="fas fa-fw fa-lock"></i>
+                                    </a>
                                 </td>
                                 <td colspan="2">
-                                    <a href="update_semester.php?id_semester=<?= $data['id_semester']; ?>">Edit</a> |
-                                    <a href="delete_semester.php?id_semester=<?= $data['id_semester']; ?>" 
+                                    <a class="btn btn-outline-success" role="button" href="update_semester.php?id_semester=<?= $data['id_semester']; ?>">Edit</a> 
+                                    <a class="btn btn-outline-danger" role="button" href="delete_semester.php?id_semester=<?= $data['id_semester']; ?>" 
                                     onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>
                                 </td>
                             </tr>

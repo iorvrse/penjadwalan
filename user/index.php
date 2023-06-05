@@ -6,7 +6,7 @@ if ( !isset($_SESSION["login"]) ) {
 	exit;
 }
 
-require 'function.php';
+require '../function.php';
 
 ?>
 
