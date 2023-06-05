@@ -43,6 +43,9 @@ if (isset($_POST['submit'])) {
     }
 
     if (password_verify($password_lama, $data['password'])) {
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
         $query = "UPDATE pengguna SET
                     nama_pengguna='$nama_pengguna',
                     password='$password',
@@ -106,27 +109,28 @@ if (isset($_POST['submit'])) {
                         <ul>
                             <li>
                                 <label for="nama_pengguna">Nama:</label>
-                                <input type="text" name="nama_pengguna" id="nama_pengguna" value="<?= $data['nama_pengguna']; ?>">
+                                <input type="text" name="nama_pengguna" id="nama_pengguna" value="<?= $data['nama_pengguna']; ?>" required>
                             </li>
                             <li>
                                 <label for="username">Username:</label>
-                                <input type="text" name="username" id="username" value="<?= $data['username']; ?>">
+                                <input type="text" name="username" id="username" value="<?= $data['username']; ?>" required>
                             </li>
                             <li>
                                 <label for="password_lama">Password lama:</label>
-                                <input type="password" name="password_lama" id="password_lama">
+                                <input type="password" name="password_lama" id="password_lama" required>
                             </li>
                             <li>
                                 <label for="password">Password baru:</label>
-                                <input type="password" name="password" id="password">
+                                <input type="password" name="password" id="password" required>
                             </li>
                             <li>
                                 <label for="password">Konfirmasi password baru:</label>
-                                <input type="password" name="password2" id="password2">
+                                <input type="password" name="password2" id="password2" required>
                             </li>
                             <li>
                                 <input type="hidden" name="id_pengguna" value="<?= $data['id_pengguna']; ?>">
-                                <button class="btn btn-outline-primary" type="submit" name="submit">Submit</button>
+                                <button class="btn btn-outline-primary" type="submit" name="submit">Edit</button>
+                                <a class="btn btn-outline-danger" role="button" href="delete_akun.php?id_pengguna=<?= $data['id_pengguna']; ?>">Delete</a>
                             </li>
                         </ul>
                     </form>

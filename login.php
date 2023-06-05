@@ -94,11 +94,9 @@ if (isset($_POST['login'])) {
                                         </button>
                                         <hr>
                                     </form>
-                                    <?php
-                                    if (isset($error)) {
-                                        echo "<div class='text-center text-danger'>Username or password is incorrect!</div>";
-                                    }
-                                    ?>
+                                    <?php if (isset($error)) : ?>
+                                        <div class='text-center text-danger'>Username or password is incorrect!</div>
+                                    <?php endif; ?>
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="register.php">Create an Account!</a>
