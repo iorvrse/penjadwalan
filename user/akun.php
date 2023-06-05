@@ -94,45 +94,46 @@ if (isset($_POST['submit'])) {
 
         <div id="content-wrapper" class="d-flex flex-column">
 
-        <div class="container-fluid">
+            <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-                <h1 class="text-gray-800">Pengaturan Akun</h1>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+                    <h1 class="text-gray-800">Pengaturan Akun</h1>
+                </div>
+
+                <div class="row mb-4">
+                    <form action="" method="post">
+                        <ul>
+                            <li>
+                                <label for="nama_pengguna">Nama:</label>
+                                <input type="text" name="nama_pengguna" id="nama_pengguna" value="<?= $data['nama_pengguna']; ?>" disabled>
+                            </li>
+                            <li>
+                                <label for="username">Username:</label>
+                                <input type="text" name="username" id="username" value="<?= $data['username']; ?>" disabled>
+                            </li>
+                            <li>
+                                <label for="password_lama">Password lama:</label>
+                                <input type="password" name="password_lama" id="password_lama">
+                            </li>
+                            <li>
+                                <label for="password">Password baru:</label>
+                                <input type="password" name="password" id="password">
+                            </li>
+                            <li>
+                                <label for="password">Konfirmasi password baru:</label>
+                                <input type="password" name="password2" id="password2">
+                            </li>
+                            <li>
+                                <input type="hidden" name="id_pengguna" value="<?= $data['id_pengguna']; ?>">
+                                <button class="btn btn-outline-primary" type="submit" name="submit">Submit</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
             </div>
-        
         </div>
-
     </div>
-
-    <form action="" method="post">
-        <ul>
-            <li>
-                <label for="nama_pengguna">Nama:</label>
-                <input type="text" name="nama_pengguna" id="nama_pengguna" value="<?= $data['nama_pengguna']; ?>" disabled>
-            </li>
-            <li>
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" value="<?= $data['username']; ?>" disabled>
-            </li>
-            <li>
-                <label for="password_lama">Password lama:</label>
-                <input type="password" name="password_lama" id="password_lama">
-            </li>
-            <li>
-                <label for="password">Password baru:</label>
-                <input type="password" name="password" id="password">
-            </li>
-            <li>
-                <label for="password">Konfirmasi password baru:</label>
-                <input type="password" name="password2" id="password2">
-            </li>
-            <li>
-                <input type="hidden" name="id_pengguna" value="<?= $data['id_pengguna']; ?>">
-                <button class="btn btn-outline-primary" type="submit" name="submit">Submit</button>
-            </li>
-        </ul>
-    </form>
     
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>

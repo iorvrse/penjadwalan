@@ -7,13 +7,13 @@ if( !isset($_SESSION["login"]) ) {
 }
 
 require '../function.php';
-$result = mysqli_query($conn, "SELECT * FROM kelas INNER JOIN semester ON kelas.id_kelas = semester.id_semester");
+$result = mysqli_query($conn, "SELECT * FROM kelas INNER JOIN semester ON kelas.id_semester = semester.id_semester");
 
 if( isset($_POST["cari"]) ) {
     $keyword = $_POST["keyword"];
     
     $query = "SELECT * FROM kelas
-            INNER JOIN semester ON kelas.id_kelas = semester.id_semester
+            INNER JOIN semester ON kelas.id_semester = semester.id_semester
             WHERE kelas.kelas LIKE '%$keyword%' OR
                 semester.tahun LIKE '%$keyword%' OR
                 semester.semester LIKE '%$keyword%'
@@ -44,43 +44,45 @@ if( isset($_POST["cari"]) ) {
 
         <div id="content-wrapper" class="d-flex flex-column">
 
-        <div class="container-fluid">
+            <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-                <h1 class="text-gray-800">Data Kelas</h1>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+                    <h1 class="text-gray-800">Data Kelas</h1>
+                </div>
+
+                <div class="row mb-4">
+                    <form action="" method="post">
+                        <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
+                        <button type="submit" name="cari">cari</button>
+                    </form>
+                </div>
+                
+                <div class="row mb-4">
+                    <table border="1" cellpadding="10" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kelas</th>
+                                <th>Tahun / Semester</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php $i = 1; ?>
+                            <?php while ($data = mysqli_fetch_assoc($result)): ?>
+                            <tr>
+                                <td><?= $i++; ?></td>
+                                <td><?= $data['kelas']; ?></td>
+                                <td><?= $data['tahun'] . " " . $data['semester']; ?></td>
+                            </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        
         </div>
-
     </div>
-
-    <form action="" method="post">
-        <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
-        <button type="submit" name="cari">cari</button>
-    </form>
-    <br>
-
-    <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Kelas</th>
-                <th>Tahun / Semester</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php $i = 1; ?>
-            <?php while ($data = mysqli_fetch_assoc($result)): ?>
-            <tr>
-                <td><?= $i++; ?></td>
-                <td><?= $data['kelas']; ?></td>
-                <td><?= $data['tahun'] . " " . $data['semester']; ?></td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
     
     
     <!-- Bootstrap core JavaScript-->

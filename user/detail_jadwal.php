@@ -24,7 +24,6 @@ $query = "SELECT * FROM jadwal
             WHERE jadwal.id_kelas = $id_kelas
         ";
 $result = mysqli_query($conn, $query);
-$data = mysqli_fetch_assoc($result);
 
 ?>
 
@@ -48,39 +47,42 @@ $data = mysqli_fetch_assoc($result);
 
         <div id="content-wrapper" class="d-flex flex-column">
 
-        <div class="container-fluid">
+            <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-                <h1 class="text-gray-800">Detail Jadwal</h1>
-            </div>
-        
-        </div>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+                    <h1 class="text-gray-800">Detail Jadwal</h1>
+                </div>
 
-    </div>
-
-    <h2><?= 'Kelas ' . $data_kelas['kelas']; ?></h2>
+                <div class="row mb-4">
+                    <h2><?= 'Kelas ' . $data_kelas['kelas']; ?></h2>
+                </div>
     
-    <table>
-        <thead>
-            <tr>
-                <th>Jam</th>
-                <th>Hari</th>
-                <th>Dosen</th>
-                <th>Matakuliah</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($data) : ?>
-                <tr>
-                    <td><?= $data['waktu_slot_awal'] . "-" . $data['waktu_slot_akhir']; ?></td>
-                    <td><?= $data['hari']; ?></td>
-                    <td><?= $data['dosen']; ?></td>
-                    <td><?= $data['matakuliah']; ?></td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+                <div class="row mb-4">
+                    <table border="1" cellpadding="10" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Jam</th>
+                                <th>Hari</th>
+                                <th>Dosen</th>
+                                <th>Matakuliah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($data = mysqli_fetch_assoc($result)) : ?>
+                                <tr>
+                                    <td><?= $data['waktu_slot_awal'] . "-" . $data['waktu_slot_akhir']; ?></td>
+                                    <td><?= $data['hari']; ?></td>
+                                    <td><?= $data['nama']; ?></td>
+                                    <td><?= $data['nama_matakuliah']; ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
