@@ -1,18 +1,17 @@
-<?php 
+<?php
 session_start();
 
-if ( isset($_SESSION['login']) and $_SESSION['level_pengguna'] != "admin" ) {
-	header("Location: user/index.php");
-	exit;
-} elseif ( isset($_SESSION['login']) ) {
+if (isset($_SESSION['login']) && $_SESSION['level_pengguna'] != "admin") {
+    header("Location: user/index.php");
+    exit;
+} elseif (isset($_SESSION['login'])) {
     header("Location: index.php");
-	exit;
+    exit;
 }
 
 require 'function.php';
 
 if (isset($_POST['login'])) {
-    
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -20,16 +19,12 @@ if (isset($_POST['login'])) {
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) === 1) {
-
         $row = mysqli_fetch_assoc($result);
-
         if (password_verify($password, $row['password'])) {
-            
             $_SESSION['login'] = true;
             $_SESSION['username'] = $username;
             $_SESSION['level_pengguna'] = $row['level_pengguna'];
-            
-            if ( $row['level_pengguna'] != "admin" ) {
+            if ($row['level_pengguna'] != "admin") {
                 header("Location: user/index.php");
                 exit;
             } else {
@@ -37,18 +32,8 @@ if (isset($_POST['login'])) {
                 exit;
             }
         }
-
     }
-    
     $error = true;
-    
-}
-
-if (isset($error)) {
-    echo "<script>
-            alert('username atau password salah!');
-        <script>"
-    ;
 }
 
 ?>
@@ -57,19 +42,15 @@ if (isset($error)) {
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Login</title>
-
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
     <style>
         body {
             display: flex;
@@ -104,13 +85,20 @@ if (isset($error)) {
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" name="password" required>
+                                                id="exampleInputPassword" placeholder="Password" name="password"
+                                                required>
                                         </div>
-                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" name="login"
+                                            class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
                                         <hr>
                                     </form>
+                                    <?php
+                                    if (isset($error)) {
+                                        echo "<div class='text-center text-danger'>Username or password is incorrect!</div>";
+                                    }
+                                    ?>
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="register.php">Create an Account!</a>
