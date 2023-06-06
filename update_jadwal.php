@@ -34,28 +34,38 @@ if( isset($_POST["submit"]) ) {
     $id_matakuliah = $_POST['id_matakuliah'];
     $hari = $_POST['hari'];
 
-    $query = "UPDATE jadwal SET id_jadwal=$id_jadwal, hari='$hari', id_slot=$id_slot, id_dosen=$id_dosen, id_matakuliah=$id_matakuliah, id_kelas=$id_kelas";
+    $query = "SELECT * FROM jadwal WHERE id_kelas = $id_kelas AND id_slot = $id_slot";
+    $result = mysqli_query($conn, $query);
     
-    mysqli_query($conn, $query);
-
-    // cek apakah data berhasil di tambahkan atau tidak
-    if (mysqli_affected_rows($conn) > 0) {
-        echo "
-            <script>
-                alert('data berhasil ditambahkan!');
-                document.location.href = 'detail_jadwal.php';
+    if (mysqli_num_rows($result) > 0) {
+        echo "<script>
+                alert('Jadwal bertabrakan, pilih slot waktu yang berbeda');
+                document.location.href = 'add_jadwal.php';
             </script>
         ";
     } else {
-        echo "
-            <script>
-                alert('data gagal ditambahkan!');
-                document.location.href = 'detail_jadwal.php';
-            </script>
-        ";
-    }
+        $query = "UPDATE jadwal SET id_jadwal=$id_jadwal, hari='$hari', id_slot=$id_slot, id_dosen=$id_dosen, id_matakuliah=$id_matakuliah, id_kelas=$id_kelas";
+        mysqli_query($conn, $query);
 
+        if (mysqli_affected_rows($conn) > 0) {
+            echo "
+                <script>
+                    alert('Data berhasil ditambahkan!');
+                </script>
+            ";
+            header("Location: detail_jadwal.php?id_kelas=$id_kelas");
+        } else {
+            echo "
+                <script>
+                    alert('Data gagal ditambahkan!');
+                </script>
+            ";
+            header("Location: detail_jadwal.php?id_kelas=$id_kelas");
+            exit;
+        }
+    }
 }
+
 ?>
 
 <!DOCTYPE html>

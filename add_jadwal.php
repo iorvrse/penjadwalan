@@ -20,39 +20,35 @@ if (isset($_POST["submit"])) {
     $id_matakuliah = $_POST['id_matakuliah'];
     $hari = $_POST['hari'];
 
-    // Check if there is a conflicting schedule
-    $verifQuery = "SELECT * FROM jadwal WHERE id_slot = $id_slot AND id_dosen = $id_dosen AND hari = '$hari'";
-    $verifResult = mysqli_query($conn, $verifQuery);
-
-    if (mysqli_num_rows($verifResult) > 0) {
-        echo "
-            <script>
-                alert('Jadwal dengan dosen, slot waktu, dan hari yang sama sudah ada!');
-                document.location.href = 'jadwal.php';
-            </script>
-        ";
-        exit; // Stop further execution if there is a conflict
-    }
-
-    $query = "INSERT INTO jadwal VALUES ('', $id_slot, '$hari', $id_dosen, $id_matakuliah, $id_kelas)";
-
-    mysqli_query($conn, $query);
-
-    // Check if data was successfully added or not
-    if (mysqli_affected_rows($conn) > 0) {
-        echo "
-            <script>
-                alert('Data berhasil ditambahkan!');
-                document.location.href = 'jadwal.php';
+    $query = "SELECT * FROM jadwal WHERE id_kelas = $id_kelas AND id_slot = $id_slot";
+    $result = mysqli_query($conn, $query);
+    
+    if (mysqli_num_rows($result) > 0) {
+        echo "<script>
+                alert('Jadwal bertabrakan, pilih slot waktu yang berbeda');
+                document.location.href = 'add_jadwal.php';
             </script>
         ";
     } else {
-        echo "
-            <script>
-                alert('Data gagal ditambahkan!');
-                document.location.href = 'jadwal.php';
-            </script>
-        ";
+        $query = "INSERT INTO jadwal VALUES ('', $id_slot, '$hari', $id_dosen, $id_matakuliah, $id_kelas)";
+
+        mysqli_query($conn, $query);
+        if (mysqli_affected_rows($conn) > 0) {
+            echo "
+                <script>
+                    alert('Data berhasil ditambahkan!');
+                </script>
+            ";
+            header("Location: detail_jadwal.php?id_kelas=$id_kelas");
+        } else {
+            echo "
+                <script>
+                    alert('Data gagal ditambahkan!');
+                </script>
+            ";
+            header("Location: detail_jadwal.php?id_kelas=$id_kelas");
+            exit;
+        }
     }
 }
 ?>

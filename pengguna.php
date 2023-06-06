@@ -51,18 +51,18 @@ if( isset($_POST["cari"]) ) {
                     <h1 class="text-gray-800">Data Pengguna</h1>
                 </div>
 
-                <div class="row mb-4">
+                <div class="mb-4">
                     <a class="btn btn-primary" role="button" href="add_pengguna.php">Tambah</a>
                 </div>
 
-                <div class="row mb-4">
+                <div class="mb-4">
                     <form action="" method="post">
                         <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
                         <button type="submit" name="cari">cari</button>
                     </form>
                 </div>
 
-                <div class="row mb-4">
+                <div>
                     <table border="1" cellpadding="10" cellspacing="0">
                         <thead>
                             <tr>
@@ -70,11 +70,11 @@ if( isset($_POST["cari"]) ) {
                                 <th>Nama</th>
                                 <th>Username</th>
                                 <th>Level Pengguna</th>
-                                <th colspan="2">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody class="table-group-divider">
                             <?php $i = 1; ?>
                             <?php while ($data = mysqli_fetch_assoc($result)): ?>
                             <tr>
@@ -82,7 +82,7 @@ if( isset($_POST["cari"]) ) {
                                 <td><?= $data['nama_pengguna']; ?></td>
                                 <td><?= $data['username']; ?></td>
                                 <td><?= $data['level_pengguna']; ?></td>
-                                <td colspan="2">
+                                <td>
                                 <?php if ($_SESSION['username'] == "admin" && $data['username'] != "admin") : ?>
                                     <a class="btn btn-outline-success" role="button" href="update_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>">Edit</a> 
                                     <a class="btn btn-outline-danger" role="button" href="delete_pengguna.php?id_pengguna=<?= $data['id_pengguna']; ?>"

@@ -80,7 +80,7 @@ $result = mysqli_query($conn, $query);
                                     <td><?= $data['hari']; ?></td>
                                     <td><?= $data['nama']; ?></td>
                                     <td><?= $data['nama_matakuliah']; ?></td>
-                                    <td colspan="2">
+                                    <td>
                                         <a class="btn btn-outline-success" role="button" href="update_jadwal.php?id_jadwal=<?= $data['id_jadwal']; ?>">Edit</a> 
                                         <a class="btn btn-outline-danger" role="button" href="delete_jadwal.php?id_jadwal=<?= $data['id_jadwal']; ?>"
                                             onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete

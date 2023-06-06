@@ -79,7 +79,7 @@ if( isset($_POST["cari"]) ) {
                                 <td><?= $i++; ?></td>
                                 <td><?= $data['waktu_slot_awal']; ?></td>
                                 <td><?= $data['waktu_slot_akhir']; ?></td>
-                                <td colspan="2">
+                                <td>
                                     <a class="btn btn-outline-success" role="button" href="update_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>">Edit</a> 
                                     <a class="btn btn-outline-danger" role="button" href="delete_slot_waktu.php?id_slot=<?= $data['id_slot']; ?>" 
                                         onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>

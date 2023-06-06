@@ -80,7 +80,7 @@ if( isset($_POST["cari"]) ) {
                                 <td><?= $data['nama']; ?></td>
                                 <td><?= $data['nip']; ?></td>
                                 <td><?= $data['bidang_ilmu']; ?></td>
-                                <td colspan="2">
+                                <td>
                                     <a class="btn btn-outline-success" role="button" href="update_dosen.php?id_dosen=<?= $data['id_dosen']; ?>">Edit</a> 
                                     <a class="btn btn-outline-danger" role="button" href="delete_dosen.php?id_dosen=<?= $data['id_dosen']; ?>" 
                                         onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>

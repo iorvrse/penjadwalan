@@ -75,7 +75,7 @@ if( isset($_POST["cari"]) ) {
                             <tr>
                                 <td><?= $i++; ?></td>
                                 <td><?= $data['nama_matakuliah']; ?></td>
-                                <td colspan="2">
+                                <td>
                                     <a class="btn btn-outline-success" role="button" href="update_matakuliah.php?id_matakuliah=<?= $data['id_matakuliah']; ?>">Edit</a> 
                                     <a class="btn btn-outline-danger" role="button" href="delete_matakuliah.php?id_matakuliah=<?= $data['id_matakuliah']; ?>" 
                                         onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>

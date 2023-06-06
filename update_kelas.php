@@ -14,7 +14,6 @@ $result = mysqli_query($conn, $query);
 $data = mysqli_fetch_assoc($result);
 
 $result2 = mysqli_query($conn, "SELECT * FROM semester");
-$semester = mysqli_fetch_assoc($result2);
 
 if (isset($_POST['submit'])) {
     
@@ -83,7 +82,7 @@ if (isset($_POST['submit'])) {
                                 <label for="id_semester">Tahun / Semester:</label>
                                 <select name="id_semester" id="id_semester">
                                     <option value="<?= $data['id_semester']; ?>"><?= $data['tahun'] . " " . $data['semester']; ?></option>
-                                    <?php while ($semester) : ?>
+                                    <?php while ($semester = mysqli_fetch_assoc($result2)) : ?>
                                         <?php if ($semester['id_semester'] != $data['id_semester']) : ?>
                                         <option value="<?= $semester['id_semester']; ?>"><?= $semester['tahun'] . " " . $semester['semester']; ?></option>
                                         <?php endif; ?>

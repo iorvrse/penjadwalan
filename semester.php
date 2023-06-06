@@ -70,7 +70,7 @@ if( isset($_POST["cari"]) ) {
                                 <th>Tahun</th>
                                 <th>Semester</th>
                                 <th>Status</th>
-                                <th colspan="2">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         
@@ -87,7 +87,7 @@ if( isset($_POST["cari"]) ) {
                                         <i class="fas fa-fw fa-lock"></i>
                                     </a>
                                 </td>
-                                <td colspan="2">
+                                <td>
                                     <a class="btn btn-outline-success" role="button" href="update_semester.php?id_semester=<?= $data['id_semester']; ?>">Edit</a> 
                                     <a class="btn btn-outline-danger" role="button" href="delete_semester.php?id_semester=<?= $data['id_semester']; ?>" 
                                     onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</a>

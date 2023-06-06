@@ -71,7 +71,7 @@ if( isset($_POST["cari"]) ) {
                             <tr>
                                 <td><?= $i++; ?></td>
                                 <td><?= $data['kelas']; ?></td>
-                                <td colspan="2">
+                                <td>
                                     <a class="btn btn-outline-success" role="button" href="detail_jadwal.php?id_kelas=<?= $data['id_kelas']; ?>">Detail</a>
                                 </td>
                             </tr>
