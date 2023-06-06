@@ -51,19 +51,19 @@ if( isset($_POST["cari"]) ) {
                     <h1 class="text-gray-800">Data Kelas</h1>
                 </div>
         
-                <div class="row mb-4">
+                <div class="mb-4">
                     <a class="btn btn-primary" role="button" href="add_kelas.php">Tambah</a>
                 </div>
 
-                <div class="row mb-4">
+                <div class="mb-4">
                     <form action="" method="post">
                         <input type="text" name="keyword" size="40" placeholder="Masukkan keyword pencarian.." autocomplete="off">
                         <button type="submit" name="cari">cari</button>
                     </form>
                 </div>
 
-                <div class="row mb-4">
-                    <table border="1" cellpadding="10" cellspacing="0">
+                <div class="table-responsive">
+                    <table class="table table-bordered" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No</th>

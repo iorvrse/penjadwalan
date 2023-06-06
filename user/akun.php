@@ -104,7 +104,7 @@ if (isset($_POST['submit'])) {
                     <h1 class="text-gray-800">Pengaturan Akun</h1>
                 </div>
 
-                <div class="row mb-4">
+                <div class="mb-4">
                     <form action="" method="post">
                         <ul>
                             <li>

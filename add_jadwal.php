@@ -39,14 +39,14 @@ if (isset($_POST["submit"])) {
                     alert('Data berhasil ditambahkan!');
                 </script>
             ";
-            header("Location: detail_jadwal.php?id_kelas=$id_kelas");
+            header("Location: jadwal.php");
         } else {
             echo "
                 <script>
                     alert('Data gagal ditambahkan!');
                 </script>
             ";
-            header("Location: detail_jadwal.php?id_kelas=$id_kelas");
+            header("Location: jadwal.php");
             exit;
         }
     }

@@ -69,7 +69,7 @@ if( isset($_POST["submit"]) ) {
                 </div>
 
 
-                <div class="row mb-4">
+                <div class="mb-4">
                     <form action="" method="post">
                         <ul>
                             <li>

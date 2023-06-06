@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2023 at 07:49 PM
+-- Generation Time: Jun 06, 2023 at 01:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,6 +34,15 @@ CREATE TABLE `dosen` (
   `bidang_ilmu` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `dosen`
+--
+
+INSERT INTO `dosen` (`id_dosen`, `nama`, `nip`, `bidang_ilmu`) VALUES
+(5, 'Budi', 1231243, 'peternakan'),
+(6, 'Saipul', 787678, 'perikanan'),
+(8, 'Rudi Setiawan', 938493424, 'pertukangan');
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +58,14 @@ CREATE TABLE `jadwal` (
   `id_kelas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `jadwal`
+--
+
+INSERT INTO `jadwal` (`id_jadwal`, `id_slot`, `hari`, `id_dosen`, `id_matakuliah`, `id_kelas`) VALUES
+(7, 2, 'senin', 5, 1, 25),
+(8, 3, 'kamis', 6, 3, 25);
+
 -- --------------------------------------------------------
 
 --
@@ -61,6 +78,15 @@ CREATE TABLE `kelas` (
   `id_semester` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id_kelas`, `kelas`, `id_semester`) VALUES
+(25, '1TKA', 4),
+(26, '1TKB', 4),
+(29, '2TKA', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -71,6 +97,16 @@ CREATE TABLE `matakuliah` (
   `id_matakuliah` int(11) NOT NULL,
   `nama_matakuliah` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `matakuliah`
+--
+
+INSERT INTO `matakuliah` (`id_matakuliah`, `nama_matakuliah`) VALUES
+(1, 'Pemrograman Dasar'),
+(2, 'Workshop Basis Data'),
+(3, 'Rangkaian Elektronika 2'),
+(4, 'Rangkaian Logika 2');
 
 -- --------------------------------------------------------
 
@@ -91,7 +127,10 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `username`, `password`, `nama_pengguna`, `level_pengguna`) VALUES
-(1, 'admin', '$2y$10$NduTYmOM3kqzIK9UxC4UrODlJoIxNtgSPpsmYqtSfusSDADmYJDcu', 'admin', 'admin');
+(1, 'admin', '$2y$10$eQTbpHiveZcZ1QaBon3WuOtw.LL0SmVEZmNWUrZdnjFrm/cLwOVd.', 'admin', 'admin'),
+(4, 'febri', '$2y$10$pj4nr0tL8sJbfLeswcDkHeHeszvwD0fjf3eZikJ1KjCtKE/8wwP7K', 'febri', 'user'),
+(5, 'suman', '$2y$10$mjaxrdKH3EcaBbm2xvBDfON5kudhdLMmKIK.SfnasRTy2eQkEvJ8G', 'sumanto', 'user'),
+(6, 'danang', '$2y$10$Bw2HV0xw2rSSjzHLA84naeiDPGn9wg5YBzAtbpMH8pOLQeNvUWvES', 'dznang', 'user');
 
 -- --------------------------------------------------------
 
@@ -106,6 +145,14 @@ CREATE TABLE `semester` (
   `status` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `semester`
+--
+
+INSERT INTO `semester` (`id_semester`, `tahun`, `semester`, `status`) VALUES
+(4, '2022/2023', 'ganjil', '1'),
+(5, '2022/2023', 'genap', '0');
+
 -- --------------------------------------------------------
 
 --
@@ -115,9 +162,18 @@ CREATE TABLE `semester` (
 CREATE TABLE `slot_waktu` (
   `id_slot` int(11) NOT NULL,
   `waktu_slot_awal` varchar(20) NOT NULL,
-  `waktu_slot_akhir` varchar(20) NOT NULL,
-  `slot_hari` varchar(20) NOT NULL
+  `waktu_slot_akhir` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `slot_waktu`
+--
+
+INSERT INTO `slot_waktu` (`id_slot`, `waktu_slot_awal`, `waktu_slot_akhir`) VALUES
+(2, '08:00', '09:40'),
+(3, '09:40', '11:20'),
+(4, '13:00', '14:40'),
+(6, '10:54', '17:59');
 
 --
 -- Indexes for dumped tables
@@ -156,7 +212,8 @@ ALTER TABLE `matakuliah`
 -- Indexes for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  ADD PRIMARY KEY (`id_pengguna`);
+  ADD PRIMARY KEY (`id_pengguna`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `semester`
@@ -178,43 +235,43 @@ ALTER TABLE `slot_waktu`
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
-  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `semester`
 --
 ALTER TABLE `semester`
-  MODIFY `id_semester` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_semester` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `slot_waktu`
 --
 ALTER TABLE `slot_waktu`
-  MODIFY `id_slot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_slot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

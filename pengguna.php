@@ -62,8 +62,8 @@ if( isset($_POST["cari"]) ) {
                     </form>
                 </div>
 
-                <div>
-                    <table border="1" cellpadding="10" cellspacing="0">
+                <div class="table-responsive">
+                    <table class="table table-bordered" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No</th>
